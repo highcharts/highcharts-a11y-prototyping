@@ -1,34 +1,36 @@
+<link rel="stylesheet" href="./menu.css">
+
 <div class="highcharts-preferences-menu">
     <!-- the h-level needs to be set by prop! -->
     <h2>Preferences</h2>
     <details>
-        <summary class="highcharts-menu-group-1">
+        <summary class="highcharts-menu-group highcharts-menu-group-1">
             <!-- h-level goes down and down! -->
             <h3>High level section<span class="highcharts-menu-hint highcharts-menu-hidden" aria-label="note: at least one child option overrides this setting.">*</span></h3>
-            <details>
-                <summary class="highcharts-menu-group-1">
-                    <form>
-                        <!-- h-level goes down and down! -->
-                        <h4>Level 2<span class="highcharts-menu-hint highcharts-menu-hidden">*</span></h4>
-                        <div>
-                            <input type="checkbox" name="enabled"/>
-                            <label for="scales">Scales<span class="highcharts-menu-indeterminant highcharts-menu-hidden">, note: at least one child option overrides this setting.</span></label>
-                        </div>
-                        <fieldset>
-                            <legend>Options</legend>
-                            <div class="highcharts-menu-slider-line"></div>
-                            <div class="highcharts-menu-slider-wrapper">
-                                <div class="highcharts-menu-slider-option">
-    
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                    <details>
-                        <summary>Show more<span class="highcharts-menu-hint highcharts-menu-hidden" aria-label="note: at least one child option overrides this setting.">*</span></summary>
-                    </details>
-                </summary>
-            </details>
         </summary>
+        <details>
+            <summary class="highcharts-menu-group highcharts-menu-group-2">
+                <!-- h-level goes down and down! -->
+                <h4>Level 2<span class="highcharts-menu-hint highcharts-menu-hidden">*</span></h4>
+            </summary>
+            <form>
+                <div>
+                    <label class="highcharts-menu-checkbox-label" for="scales" aria-label="Enable scales">Scales<span class="highcharts-menu-indeterminant highcharts-menu-hidden">, note: at least one child option overrides this setting.</span></label>
+                    <input class="highcharts-menu-checkbox" type="checkbox" name="enabled"/>
+                </div>
+                <!-- <fieldset> -->
+                    <!-- <legend>Options</legend> -->
+                <div class="highcharts-menu-slider-line"></div>
+                <div class="highcharts-menu-slider-wrapper">
+                    <div class="highcharts-menu-slider-option">
+
+                    </div>
+                </div>
+                <!-- </fieldset> -->
+            </form>
+            <details>
+                <summary>Show more<span class="highcharts-menu-hint highcharts-menu-hidden" aria-label="note: at least one child option overrides this setting.">*</span></summary>
+            </details>
+        </details>
     </details>
 </div>

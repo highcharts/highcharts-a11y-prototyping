@@ -1,0 +1,72 @@
+body {
+    padding: 50px;
+}
+
+h1, h2, h3, h4, h5 h6 {
+    margin-top: 0px;
+    display: inline-block;
+}
+
+fieldset {
+
+}
+
+legend {
+
+}
+
+details {
+
+}
+
+summary {
+
+}
+
+.highcharts-menu-group {
+
+}
+
+.highcharts-menu-group-1 {
+    
+}
+
+.highcharts-menu-group-2 {
+
+}
+
+.highcharts-menu-group-3 {
+
+}
+
+.highcharts-menu-hint {
+
+}
+
+.highcharts-menu-hidden {
+    display: none;
+}
+
+.highcharts-menu-indeterminant {
+
+}
+
+.highcharts-menu-slider-line {
+
+}
+
+.highcharts-menu-slider-wrapper {
+
+}
+
+.highcharts-menu-slider-option {
+
+}
+
+.highcharts-menu-checkbox {
+
+}
+
+.highcharts-menu-checkbox-label {
+
+}
