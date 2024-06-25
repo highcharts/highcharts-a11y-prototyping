@@ -1808,12 +1808,8 @@ function generatePreferencesHTML(preferences, level = 2) {
       <summary class="highcharts-menu-group highcharts-menu-group-${level - 1}">
         <${headingTag}>${pref.name}<span class="highcharts-menu-hint highcharts-menu-hidden">*</span></${headingTag}>
       </summary>`;
-    
-    if (pref.children && pref.children.length > 0) {
-      html += generatePreferencesHTML(pref.children, nextLevel);
-    }
-    
-    html += `<form>
+
+      html += `<form>
       <div class="highcharts-menu-column">
         <div class="highcharts-column-left">
           <label class="highcharts-menu-checkbox-label-${level - 1}" for="${inputName}" aria-label="Enable ${pref.name}">${pref.name}<span class="highcharts-menu-indeterminant highcharts-menu-hidden">, note: at least one child option overrides this setting.</span></label>
@@ -1831,6 +1827,10 @@ function generatePreferencesHTML(preferences, level = 2) {
     html += `</div>
       </div>
     </form>`;
+    
+    if (pref.children && pref.children.length > 0) {
+      html += generatePreferencesHTML(pref.children, nextLevel);
+    }
     
     html += '</details>';
   });
