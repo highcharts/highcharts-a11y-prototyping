@@ -1681,57 +1681,51 @@ const allPreferences = [
                     "use confirmation"
                 ],
                 "children": []
-            }
-        ]
-    },
-    {
-        "name": "Input mapping",
-        "options": [],
-        "children": [
-            {
-                "name": "Help",
-                "options": [
-                    "F1",
-                    "custom keypress"
-                ],
-                "children": []
             },
             {
-                "name": "Preferences menu",
-                "options": [
-                    "Shift+F1",
-                    "custom keypress"
-                ],
-                "children": []
-            },
-            {
-                "name": "Activate Hover",
-                "options": [
-                    "on focus",
-                    "custom keypress"
-                ],
-                "children": []
-            },
-            {
-                "name": "Remove Hover",
-                "options": [
-                    "Backspace/on loss of focus",
-                    "custom keypress"
-                ],
-                "children": []
-            },
-            {
-                "name": "Select",
-                "options": [
-                    "Spacebar/Enter",
-                    "custom keypress"
-                ],
-                "children": []
-            },
-            {
-                "name": "Movement",
+                "name": "Input mapping",
                 "options": [],
                 "children": [
+                    {
+                        "name": "Help",
+                        "options": [
+                            "F1",
+                            "custom keypress"
+                        ],
+                        "children": []
+                    },
+                    {
+                        "name": "Preferences menu",
+                        "options": [
+                            "Shift+F1",
+                            "custom keypress"
+                        ],
+                        "children": []
+                    },
+                    {
+                        "name": "Activate Hover",
+                        "options": [
+                            "on focus",
+                            "custom keypress"
+                        ],
+                        "children": []
+                    },
+                    {
+                        "name": "Remove Hover",
+                        "options": [
+                            "Backspace/on loss of focus",
+                            "custom keypress"
+                        ],
+                        "children": []
+                    },
+                    {
+                        "name": "Select",
+                        "options": [
+                            "Spacebar/Enter",
+                            "custom keypress"
+                        ],
+                        "children": []
+                    },
                     {
                         "name": "Exit and skip chart",
                         "options": [

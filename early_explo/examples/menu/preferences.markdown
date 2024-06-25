@@ -165,13 +165,12 @@
 - - Tooltips (disabled, show on focus, toggle-only)
 - - Element selection (disabled, no confirmation, use confirmation)
 - - Filtering (disabled, no confirmation, use confirmation)
-- Input mapping
-- - Help (F1, custom keypress)
-- - Preferences menu (Shift+F1, custom keypress)
-- - Activate Hover (on focus, custom keypress)
-- - Remove Hover (Backspace/on loss of focus, custom keypress)
-- - Select (Spacebar/Enter, custom keypress)
-- - Movement
+- - Input mapping
+- - - Help (F1, custom keypress)
+- - - Preferences menu (Shift+F1, custom keypress)
+- - - Activate Hover (on focus, custom keypress)
+- - - Remove Hover (Backspace/on loss of focus, custom keypress)
+- - - Select (Spacebar/Enter, custom keypress)
 - - - Exit and skip chart (Escape, custom keypress)
 - - - Next element (AT default, right, down, custom keypress)
 - - - Previous element (AT default, left, up, custom keypress)
