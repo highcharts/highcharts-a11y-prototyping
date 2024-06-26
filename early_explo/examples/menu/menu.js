@@ -1796,48 +1796,64 @@ const allPreferences = [
     }
 ]
 
-function generatePreferencesHTML(preferences, level = 2) {
+function generatePreferencesHTML(preferences, level = 2, parentName = '') {
   let html = '';
   
   preferences.forEach(pref => {
     const headingTag = `h${level}`;
     const nextLevel = level + 1;
     const inputName = pref.name.toLowerCase().replace(/\s+/g, '-');
-    
-    html += `<details>
-      <summary class="highcharts-menu-group highcharts-menu-group-${level - 1}">
-        <${headingTag}>${pref.name}<span class="highcharts-menu-hint highcharts-menu-hidden">*</span></${headingTag}>
-      </summary>`;
+    const children = pref.children && pref.children.length > 0
 
-      html += `<form>
-      <div class="highcharts-menu-column">
-        <div class="highcharts-column-left">
-          <label class="highcharts-menu-checkbox-label-${level - 1}" for="${inputName}" aria-label="Enable ${pref.name}">${pref.name}<span class="highcharts-menu-indeterminant highcharts-menu-hidden">, note: at least one child option overrides this setting.</span></label>
-          <input class="highcharts-menu-checkbox" type="checkbox" name="${inputName}-enabled"/>
-        </div>
-        <div class="highcharts-menu-slider-wrapper highcharts-column-right">
-          <div class="highcharts-menu-slider-line"></div>`;
-    
+    const details = children ? "details" : "div class='highcharts-empty-details'"
+    const summary = children ? "summary" : "div class='highcharts-empty-summary'"
+
+    html += `<${details}>
+        <${summary} class="highcharts-menu-group highcharts-menu-group-${level - 1}">
+            <form>
+                <div class="highcharts-menu-column">
+                    <div class="highcharts-column-left">
+                    <label class="highcharts-menu-checkbox-label-${level - 1}" for="${parentName+inputName}">
+                        <${headingTag}>${pref.name}<span class="highcharts-menu-hint highcharts-menu-hidden" aria-label="note: at least one child option overrides this setting.">*</span></${headingTag}>
+                    </label>
+                        
+                    <input class="highcharts-menu-checkbox" type="checkbox" name="${parentName+inputName}"/>
+                    </div>
+                    <div class="highcharts-menu-slider-line"></div>
+                    <div id="${parentName+inputName}-menu" class="highcharts-menu-slider-wrapper highcharts-column-right highcharts-menu-slider-disabled">`;
+                
     pref.options.forEach((option, index) => {
-      const optionName = `${inputName}-${option.toLowerCase().replace(/\s+/g, '-')}`;
-      html += `<label for="${optionName}" data-value="${option.toLowerCase()}">${option}</label>
-          <input type="radio" name="${optionName}" id="${optionName}" value="${index}" required="" disabled>`;
+        const optionName = `${parentName+inputName}-${option.toLowerCase().replace(/\s+/g, '-')}`;
+        html += `<div class="highcharts-menu-slider-option"><label for="${optionName}" data-value="${option.toLowerCase()}">
+                ${option}
+            </label><input type="radio" name="${parentName+inputName}" id="${optionName}" value="${index}" required="" disabled></div>`;
     });
-    
-    html += `</div>
-      </div>
-    </form>`;
-    
-    if (pref.children && pref.children.length > 0) {
-      html += generatePreferencesHTML(pref.children, nextLevel);
+                
+    html += `</div></div></form></${summary}>`;
+    const newParent = parentName+inputName+'-'
+    if (children) {
+      html += generatePreferencesHTML(pref.children, nextLevel, newParent);
     }
     
-    html += '</details>';
+    html += `</${details}>`;
   });
 
   return html;
 }
 
-  let x = generatePreferencesHTML(allPreferences)
-  console.log(x)
-  document.getElementById('menu').innerHTML = x
+let x = generatePreferencesHTML(allPreferences)
+
+document.getElementById('menu').innerHTML = x
+
+const toggleOptions = (e) => {
+    console.log("e",e)
+    const menu = document.getElementById(e.srcElement.name + "-menu")
+    const inputs = [...menu.querySelectorAll('input')]
+    menu.classList.toggle("highcharts-menu-slider-disabled")
+    inputs.forEach(input => input.disabled = !input.disabled)
+}
+const checkboxes = [...document.querySelectorAll(".highcharts-menu-checkbox")]
+console.log("checkboxes",checkboxes)
+checkboxes.forEach(box => {
+    box.addEventListener("click",toggleOptions)
+})
