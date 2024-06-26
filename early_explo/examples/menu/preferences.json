@@ -1075,6 +1075,66 @@
         ],
         "children": [
             {
+                "name": "Text color",
+                "options": [
+                    "black",
+                    "white",
+                    "grey",
+                    "custom"
+                ],
+                "children": []
+            },
+            {
+                "name": "Mark color",
+                "options": [
+                    "disabled",
+                    "limited dark",
+                    "limited white"
+                ],
+                "children": [
+                    {
+                        "name": "Categorical data types",
+                        "options": [
+                            "disabled",
+                            "limited dark",
+                            "limited white",
+                            "custom"
+                        ],
+                        "children": []
+                    },
+                    {
+                        "name": "Ordinal data types",
+                        "options": [
+                            "disabled",
+                            "limited dark",
+                            "limited white",
+                            "custom"
+                        ],
+                        "children": []
+                    },
+                    {
+                        "name": "Quantitative data types",
+                        "options": [
+                            "disabled",
+                            "limited dark",
+                            "limited white",
+                            "custom"
+                        ],
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "name": "Non-data marks",
+                "options": [
+                    "disabled",
+                    "limited dark",
+                    "limited white",
+                    "custom"
+                ],
+                "children": []
+            },
+            {
                 "name": "Differentiate without color",
                 "options": [
                     "disabled",
@@ -1086,8 +1146,8 @@
                 "name": "Shapes",
                 "options": [
                     "disabled",
-                    "semantically different",
                     "same-shape variation",
+                    "semantically different",
                     "custom"
                 ],
                 "children": [
@@ -1134,11 +1194,8 @@
                         "name": "Title",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
                             "high contrast",
-                            "high+limited",
                             "custom"
                         ],
                         "children": []
@@ -1147,11 +1204,8 @@
                         "name": "Subtitle",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
                             "high contrast",
-                            "high+limited",
                             "custom"
                         ],
                         "children": []
@@ -1160,11 +1214,8 @@
                         "name": "Mark Labels",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
                             "high contrast",
-                            "high+limited",
                             "custom"
                         ],
                         "children": []
@@ -1173,11 +1224,8 @@
                         "name": "Series Labels",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
                             "high contrast",
-                            "high+limited",
                             "custom"
                         ],
                         "children": []
@@ -1186,11 +1234,8 @@
                         "name": "Legend Title",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
                             "high contrast",
-                            "high+limited",
                             "custom"
                         ],
                         "children": []
@@ -1199,11 +1244,8 @@
                         "name": "Legend Labels",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
                             "high contrast",
-                            "high+limited",
                             "custom"
                         ],
                         "children": []
@@ -1212,11 +1254,8 @@
                         "name": "Axis Titles",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
                             "high contrast",
-                            "high+limited",
                             "custom"
                         ],
                         "children": []
@@ -1225,11 +1264,8 @@
                         "name": "Axis Labels",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
                             "high contrast",
-                            "high+limited",
                             "custom"
                         ],
                         "children": []
@@ -1238,11 +1274,8 @@
                         "name": "Caption",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
                             "high contrast",
-                            "high+limited",
                             "custom"
                         ],
                         "children": []
@@ -1251,11 +1284,8 @@
                         "name": "Annotations",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
                             "high contrast",
-                            "high+limited",
                             "custom"
                         ],
                         "children": []
@@ -1264,11 +1294,8 @@
                         "name": "Miscellaneous",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
                             "high contrast",
-                            "high+limited",
                             "custom"
                         ],
                         "children": []
@@ -1287,12 +1314,8 @@
                         "name": "Categorical data types",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
-                            "high contrast",
-                            "high+limited",
-                            "custom"
+                            "high contrast"
                         ],
                         "children": []
                     },
@@ -1300,12 +1323,8 @@
                         "name": "Ordinal data types",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
-                            "high contrast",
-                            "high+limited",
-                            "custom"
+                            "high contrast"
                         ],
                         "children": []
                     },
@@ -1313,12 +1332,8 @@
                         "name": "Quantitative data types",
                         "options": [
                             "disabled",
-                            "follow system settings",
                             "low contrast",
-                            "low+limited",
-                            "high contrast",
-                            "high+limited",
-                            "custom"
+                            "high contrast"
                         ],
                         "children": []
                     }
@@ -1328,12 +1343,8 @@
                 "name": "Non-data marks",
                 "options": [
                     "disabled",
-                    "follow system settings",
                     "low contrast",
-                    "low+limited",
-                    "high contrast",
-                    "high+limited",
-                    "custom"
+                    "high contrast"
                 ],
                 "children": []
             },
@@ -1350,11 +1361,8 @@
                 "name": "Axis line contrast",
                 "options": [
                     "disabled",
-                    "follow system settings",
                     "low contrast",
-                    "low+limited",
                     "high contrast",
-                    "high+limited",
                     "custom"
                 ],
                 "children": []
@@ -1363,11 +1371,8 @@
                 "name": "Gridline contrast",
                 "options": [
                     "disabled",
-                    "follow system settings",
                     "low contrast",
-                    "low+limited",
                     "high contrast",
-                    "high+limited",
                     "custom"
                 ],
                 "children": []
@@ -1376,11 +1381,8 @@
                 "name": "Mark outline contrast",
                 "options": [
                     "disabled",
-                    "follow system settings",
                     "low contrast",
-                    "low+limited",
                     "high contrast",
-                    "high+limited",
                     "custom"
                 ],
                 "children": []
@@ -1389,11 +1391,8 @@
                 "name": "Text outline contrast",
                 "options": [
                     "disabled",
-                    "follow system settings",
                     "low contrast",
-                    "low+limited",
                     "high contrast",
-                    "high+limited",
                     "custom"
                 ],
                 "children": []
@@ -1402,11 +1401,8 @@
                 "name": "Interaction state contrast",
                 "options": [
                     "disabled",
-                    "follow system settings",
                     "low contrast",
-                    "low+limited",
                     "high contrast",
-                    "high+limited",
                     "custom"
                 ],
                 "children": []
@@ -1415,11 +1411,8 @@
                 "name": "Miscellaneous element contrast",
                 "options": [
                     "disabled",
-                    "follow system settings",
                     "low contrast",
-                    "low+limited",
                     "high contrast",
-                    "high+limited",
                     "custom"
                 ],
                 "children": []
@@ -1652,17 +1645,16 @@
                     "show as log",
                     "always show"
                 ],
-                "children": [
-                    {
-                        "name": "Tooltips",
-                        "options": [
-                            "disabled",
-                            "show on focus",
-                            "toggle-only"
-                        ],
-                        "children": []
-                    }
-                ]
+                "children": []
+            },
+            {
+                "name": "Tooltips",
+                "options": [
+                    "disabled",
+                    "show on focus",
+                    "toggle only"
+                ],
+                "children": []
             },
             {
                 "name": "Element selection",
