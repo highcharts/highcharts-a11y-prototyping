@@ -1,9 +1,9 @@
 body {
-    padding: 50px;
+    padding: 3em;
 }
 
 h1, h2, h3, h4, h5 h6 {
-    margin-top: 0px;
+    margin-top: 0;
     display: inline;
 }
 
@@ -20,17 +20,17 @@ legend {
 }
 
 details, .highcharts-empty-details {
-    /* padding-bottom: 10px; */
-    padding-left: 15px;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
 }
 
 .highcharts-empty-details {
-    padding-left: 29px;
+    padding-left: 1.8125em;
 }
 
 summary, .highcharts-empty-summary {
-    padding-bottom: 4px;
-    padding-top: 6px;
+    padding-bottom: 0.25em;
+    padding-top: 0.375em;
 }
 
 .highcharts-menu-column {
@@ -38,7 +38,8 @@ summary, .highcharts-empty-summary {
 }
 
 .highcharts-column-left {
-    display: inline;
+    display: inline-block;
+    min-width: 15em;
 }
 
 .highcharts-column-right {
@@ -103,6 +104,7 @@ summary, .highcharts-empty-summary {
 }
 
 .highcharts-menu-slider-option label {
+
 }
 
 .highcharts-menu-checkbox {
@@ -110,5 +112,4 @@ summary, .highcharts-empty-summary {
 }
 
 .highcharts-menu-checkbox-label {
-
 }
