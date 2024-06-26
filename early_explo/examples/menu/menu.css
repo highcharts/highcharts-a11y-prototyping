@@ -40,6 +40,7 @@ summary, .highcharts-empty-summary {
 .highcharts-column-left {
     display: inline-block;
     min-width: 16em;
+    /* margin-bottom: 2.5em; */
 }
 
 .highcharts-column-right {
@@ -75,12 +76,13 @@ summary, .highcharts-empty-summary {
 }
 
 .highcharts-menu-slider-line {
-    display: inline;
+    /* display: inline; */
 }
 
 .highcharts-menu-slider-wrapper {
     left: 0;
-    top: -1.95em;
+    /* top: -1.95em; */
+    padding-top: 0.2em;
     position: relative;
     text-align: center;
     display: inline-block;
@@ -137,8 +139,10 @@ details > summary::-webkit-details-marker {
 
 details > summary::before {
     content: '\25BA';
+    padding-right: .1em;
 }
 
 details[open] > summary::before {
     content: '\25BC';
+    padding-right: 0;
 }
