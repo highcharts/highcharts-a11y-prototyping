@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="./menu.css">
+<div class="highcharts-preferences-menu">
+    <!-- the h-level needs to be set by prop! -->
+    <h2>Preferences</h2>
+    <details>
+        <summary class="highcharts-menu-group highcharts-menu-group-1">
+            <!-- h-level goes down and down! -->
+            <h3>High level section<span class="highcharts-menu-hint highcharts-menu-hidden" aria-label="note: at least one child option overrides this setting.">*</span></h3>
+        </summary>
+        <details>
+            <summary class="highcharts-menu-group highcharts-menu-group-2">
+                <!-- h-level goes down and down! -->
+                <h4>Level 2<span class="highcharts-menu-hint highcharts-menu-hidden">*</span></h4>
+            </summary>
+            <form>
+                <div class="highcharts-menu-column">
+                    <div class="highcharts-column-left">
+                        <label class="highcharts-menu-checkbox-label-1" for="explanations" aria-label="Enable scales">Explanations<span class="highcharts-menu-indeterminant highcharts-menu-hidden">, note: at least one child option overrides this setting.</span></label>
+                        <input class="highcharts-menu-checkbox" type="checkbox" name="explanations-enabled"/>
+                    </div>
+                    <!-- <fieldset> -->
+                        <!-- <legend>Options</legend> -->
+                    <div class="highcharts-menu-slider-wrapper highcharts-column-right">
+                        <div class="highcharts-menu-slider-line"></div> 
+                        <!-- <div class="highcharts-menu-slider-option"> -->
+                            <label for="highcharts-explanations-hide" data-value="hide">Hide</label>
+                            <input type="radio" name="highcharts-explanations-hide" id="highcharts-explanations-hide" value="0" required="" disabled>
+                        <!-- </div> -->
+                        <!-- <div class="highcharts-menu-slider-option"> -->
+                            <label for="highcharts-explanations-minimal" data-value="minimal">Minimal</label>
+                            <input type="radio" name="highcharts-explanations-minimal" id="highcharts-explanations-minimal" value="1" required="" disabled>
+                        <!-- </div> -->
+                        <!-- <div class="highcharts-menu-slider-option"> -->
+                            <label for="highcharts-explanations-verbose" data-value="verbose">Verbose</label>
+                            <input type="radio" name="highcharts-explanations-verbose" id="highcharts-explanations-verbose" value="2" required="" disabled>
+                        <!-- </div> -->
+                    </div>
+                </div>
+                <!-- </fieldset> -->
+            </form>
+            <details>
+                <summary>Show more<span class="highcharts-menu-hint highcharts-menu-hidden" aria-label="note: at least one child option overrides this setting.">*</span></summary>
+                <form>
+                    <div class="highcharts-menu-column">
+                        <div class="highcharts-column-left">
+                            <label class="highcharts-menu-checkbox-label-2" for="chart" aria-label="Enable scales">Chart<span class="highcharts-menu-indeterminant highcharts-menu-hidden">, note: at least one child option overrides this setting.</span></label>
+                            <input class="highcharts-menu-checkbox" type="checkbox" name="explanations-chart-enabled"/>
+                        </div>
+                        <!-- <fieldset> -->
+                            <!-- <legend>Options</legend> -->
+                        <div class="highcharts-menu-slider-wrapper highcharts-column-right">
+                            <div class="highcharts-menu-slider-line"></div> 
+                            <!-- <div class="highcharts-menu-slider-option"> -->
+                                <label for="highcharts-explanations-chart-hide" data-value="hide">Hide</label>
+                                <input type="radio" name="highcharts-explanations-chart-hide" id="highcharts-explanations-chart-hide" value="0" required="" disabled>
+                            <!-- </div> -->
+                            <!-- <div class="highcharts-menu-slider-option"> -->
+                                <label for="highcharts-explanations-chart-minimal" data-value="minimal">Minimal</label>
+                                <input type="radio" name="highcharts-explanations-chart-minimal" id="highcharts-explanations-chart-minimal" value="1" required="" disabled>
+                            <!-- </div> -->
+                            <!-- <div class="highcharts-menu-slider-option"> -->
+                                <label for="highcharts-explanations-chart-verbose" data-value="verbose">Verbose</label>
+                                <input type="radio" name="highcharts-explanations-chart-verbose" id="highcharts-explanations-chart-verbose" value="2" required="" disabled>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    <!-- </fieldset> -->
+                </form>
+            </details>
+            
+        </details>
+    </details>
+</div>

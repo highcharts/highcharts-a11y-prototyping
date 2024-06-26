@@ -1,0 +1,114 @@
+body {
+    padding: 50px;
+}
+
+h1, h2, h3, h4, h5 h6 {
+    margin-top: 0px;
+    display: inline;
+}
+
+form {
+    display: inline;
+}
+
+fieldset {
+
+}
+
+legend {
+
+}
+
+details, .highcharts-empty-details {
+    /* padding-bottom: 10px; */
+    padding-left: 15px;
+}
+
+.highcharts-empty-details {
+    padding-left: 29px;
+}
+
+summary, .highcharts-empty-summary {
+    padding-bottom: 4px;
+    padding-top: 6px;
+}
+
+.highcharts-menu-column {
+    display: inline;
+}
+
+.highcharts-column-left {
+    display: inline;
+}
+
+.highcharts-column-right {
+    display: inline;
+}
+
+.highcharts-menu-group {
+
+}
+
+.highcharts-menu-group-1 {
+    
+}
+
+.highcharts-menu-group-2 {
+
+}
+
+.highcharts-menu-group-3 {
+
+}
+
+.highcharts-menu-hint {
+
+}
+
+.highcharts-menu-hidden {
+    display: none;
+}
+
+.highcharts-menu-indeterminant {
+
+}
+
+.highcharts-menu-slider-line {
+    display: inline;
+}
+
+.highcharts-menu-slider-wrapper {
+    left: 0;
+    top: -1.25em;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+}
+
+.highcharts-menu-slider-disabled {
+    color: #767676
+}
+
+
+.highcharts-menu-slider-option {
+    text-align: center;
+    padding: 0 0.75em;
+    display: inherit;
+}
+
+.highcharts-menu-slider-option input {
+    text-align: center;
+    display: block;
+    margin: 0.2em auto 0;
+}
+
+.highcharts-menu-slider-option label {
+}
+
+.highcharts-menu-checkbox {
+
+}
+
+.highcharts-menu-checkbox-label {
+
+}
