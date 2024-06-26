@@ -117,13 +117,14 @@ summary, .highcharts-empty-summary {
 
 input[type=radio], input[type=checkbox] {
     position: relative;
-    top: 0.4em;
-    height: 1.8em;
-    width: 1.8em;
+    top: 0.2em;
+    height: 2em;
+    width: 2em;
 }
 
 input[type=checkbox] {
     margin: 0 0.75em;
+    top: 0.4em;
 }
 
 details > summary {
