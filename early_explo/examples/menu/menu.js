@@ -284,7 +284,7 @@ const toggleOptions = (e) => {
     menu.setAttribute('data-highcharts-override', 'true')
     toggleMenu(menu)
 
-    const childrenBoxes = [...e.srcElement.form.parentNode.parentNode.querySelectorAll("input")]
+    const childrenBoxes = [...e.srcElement.form.parentNode.parentNode.querySelectorAll('input[type="checkbox"]')]
     childrenBoxes.forEach(box =>{
         if (!box.getAttribute('data-highcharts-override')) {
             box.checked = e.srcElement.checked
