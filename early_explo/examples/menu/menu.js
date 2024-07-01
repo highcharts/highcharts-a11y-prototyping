@@ -110,7 +110,7 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - - Annotations (left, centered, right)
 - - - Misc. (left, centered, right)
 - Color and contrast (disabled, minimalist, maximalist)
-- - Text color (black, white, grey, custom)
+- - Text color (black, grey, white, custom)
 - - Mark color (disabled, limited dark, limited white)
 - - - Categorical data types (disabled, limited dark, limited white, custom)
 - - - Ordinal data types (disabled, limited dark, limited white, custom)
@@ -189,22 +189,16 @@ var parsePreferences = (str) => {
     const lines = str.trim().split('\n');
     const stack = [];
     let root = [];
-    console.log("lines",lines)
   
     lines.forEach(line => {
-      console.log("root",root)
       const indentLevel = (line.match(/-/g) || []).length;
-      console.log("indentLevel",indentLevel)
       if (!indentLevel) {console.log("FAILURE")}
   
       const cleanLine = line.replaceAll('- ',''); // Remove '- ' from the start
-      console.log("cleanline",cleanLine)
   
       const [name, optionsStr] = cleanLine.split(' (');
-      console.log("options are...",optionsStr)
   
       const options = optionsStr ? optionsStr.slice(0, -1).split(', ') : [];
-      console.log(options,"options")
   
       const newItem = {
         name: name.trim(),
@@ -216,13 +210,10 @@ var parsePreferences = (str) => {
           root.push(newItem);
       } else {
           const parent = root[root.length - 1];
-          console.log("parent",parent)
           // if (!parent.children) parent.children = [];
           let target = parent;
           if (indentLevel === 3) {
               target = parent.children[parent.children.length - 1];
-  
-              console.log("new target",target)
           }
           target.children.push(newItem)
       }
@@ -280,15 +271,38 @@ let x = generatePreferencesHTML(allPreferences)
 
 document.getElementById('menu').innerHTML = x
 
-const toggleOptions = (e) => {
-    console.log("e",e)
-    const menu = document.getElementById(e.srcElement.name + "-menu")
+const toggleMenu = (menu) => {
     const inputs = [...menu.querySelectorAll('input')]
     menu.classList.toggle("highcharts-menu-slider-disabled")
     inputs.forEach(input => input.disabled = !input.disabled)
 }
+
+const toggleOptions = (e) => {
+    console.log("e",e)
+    e.srcElement.setAttribute('data-highcharts-override', 'true')
+    const menu = document.getElementById(e.srcElement.name + "-menu")
+    menu.setAttribute('data-highcharts-override', 'true')
+    toggleMenu(menu)
+
+    const childrenBoxes = [...e.srcElement.form.parentNode.parentNode.querySelectorAll("input")]
+    childrenBoxes.forEach(box =>{
+        if (!box.getAttribute('data-highcharts-override')) {
+            box.checked = e.srcElement.checked
+        }
+    })
+
+    const childrenMenus = [...e.srcElement.form.parentNode.parentNode.querySelectorAll(".highcharts-menu-slider-wrapper")]
+    let i = 0;
+    childrenMenus.forEach(menuChild => {
+        // if the user hasn't overriden the checkbox already AND
+        // we aren't looking at the first checkbox
+        if (!menuChild.getAttribute('data-highcharts-override') && i) {
+            toggleMenu(menuChild)
+        }
+        i++
+    })
+}
 const checkboxes = [...document.querySelectorAll(".highcharts-menu-checkbox")]
-console.log("checkboxes",checkboxes)
 checkboxes.forEach(box => {
     box.addEventListener("click",toggleOptions)
 })
