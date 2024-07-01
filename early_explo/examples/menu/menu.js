@@ -35,7 +35,7 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - - Axis Labels (small, small+, medium, medium+, large)
 - - - Caption (small, small+, medium, medium+, large)
 - - - Annotations (small, small+, medium, medium+, large)
-- - - Miscellaneous (small, small+, medium, medium+, large)
+- - - Misc. (small, small+, medium, medium+, large)
 - - Font Weight (light, regular, bold)
 - - - Title (thin, light, regular, bold, black)
 - - - Subtitle (thin, light, regular, bold, black)
@@ -47,7 +47,7 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - - Axis Labels (thin, light, regular, bold, black)
 - - - Caption (thin, light, regular, bold, black)
 - - - Annotations (thin, light, regular, bold, black)
-- - - Miscellaneous (thin, light, regular, bold, black)
+- - - Misc. (thin, light, regular, bold, black)
 - - Font Family (sans serif, serif, slab serif)
 - - - Title (sans serif, serif, slab serif)
 - - - Subtitle (sans serif, serif, slab serif)
@@ -59,7 +59,7 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - - Axis Labels (sans serif, serif, slab serif)
 - - - Caption (sans serif, serif, slab serif)
 - - - Annotations (sans serif, serif, slab serif)
-- - - Miscellaneous (sans serif, serif, slab serif)
+- - - Misc. (sans serif, serif, slab serif)
 - - Text overflow (truncate, ellipses, allow overflow)
 - - - Title (truncate, ellipses, allow overflow)
 - - - Subtitle (truncate, ellipses, allow overflow)
@@ -71,7 +71,7 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - - Axis Labels (truncate, ellipses, allow overflow)
 - - - Caption (truncate, ellipses, allow overflow)
 - - - Annotations (truncate, ellipses, allow overflow)
-- - - Miscellaneous (truncate, ellipses, allow overflow)
+- - - Misc. (truncate, ellipses, allow overflow)
 - - Horizontal Spacing (tight, moderate, wide)
 - - - Title (tight, moderate, wide)
 - - - Subtitle (tight, moderate, wide)
@@ -83,7 +83,7 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - - Axis Labels (tight, moderate, wide)
 - - - Caption (tight, moderate, wide)
 - - - Annotations (tight, moderate, wide)
-- - - Miscellaneous (tight, moderate, wide)
+- - - Misc. (tight, moderate, wide)
 - - Vertical Spacing (tight, moderate, wide)
 - - - Title (tight, moderate, wide)
 - - - Subtitle (tight, moderate, wide)
@@ -95,7 +95,7 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - - Axis Labels (tight, moderate, wide)
 - - - Caption (tight, moderate, wide)
 - - - Annotations (tight, moderate, wide)
-- - - Miscellaneous (tight, moderate, wide)
+- - - Misc. (tight, moderate, wide)
 - - Italics (allow, disable)
 - - Alignment (left, centered, right)
 - - - Title (left, centered, right)
@@ -108,16 +108,16 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - - Axis Labels (left, centered, right)
 - - - Caption (left, centered, right)
 - - - Annotations (left, centered, right)
-- - - Miscellaneous (left, centered, right)
+- - - Misc. (left, centered, right)
 - Color and contrast (disabled, minimalist, maximalist)
-- - Text color (black, white, grey, custom)
+- - Text color (black, grey, white, custom)
 - - Mark color (disabled, limited dark, limited white)
 - - - Categorical data types (disabled, limited dark, limited white, custom)
 - - - Ordinal data types (disabled, limited dark, limited white, custom)
 - - - Quantitative data types (disabled, limited dark, limited white, custom)
 - - - Non data marks (disabled, limited dark, limited white, custom)
-- - Differentiate without color (disabled, enabled)
-- - - Shapes (disabled, same-shape variation, semantically different, custom)
+- - Distinguish without color (disabled, enabled)
+- - - Shapes (disabled, 1 varied type, different types, custom)
 - - - Fill patterns (disabled, low contrast, high contrast, custom)
 - - - Line patterns (disabled, enabled, custom)
 - - - Interaction states (disabled, patterns, marks, patterns + marks)
@@ -132,7 +132,7 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - - Axis Labels (disabled, low contrast, high contrast, custom)
 - - - Caption (disabled, low contrast, high contrast, custom)
 - - - Annotations (disabled, low contrast, high contrast, custom)
-- - - Miscellaneous (disabled, low contrast, high contrast, custom)
+- - - Misc. (disabled, low contrast, high contrast, custom)
 - - Mark contrast (disabled, low contrast, high contrast)
 - - - Categorical data types (disabled, low contrast, high contrast)
 - - - Ordinal data types (disabled, low contrast, high contrast)
@@ -144,7 +144,7 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - Mark outline contrast (disabled, low contrast, high contrast, custom)
 - - Text outline contrast (disabled, low contrast, high contrast, custom)
 - - Interaction state contrast (disabled, low contrast, high contrast, custom)
-- - Miscellaneous element contrast (disabled, low contrast, high contrast, custom)
+- - Misc. element contrast (disabled, low contrast, high contrast, custom)
 - Element size (smaller, moderate, larger)
 - - Bar spacing (0%, 10%, 20%, 30%, 40%, 50%)
 - - Lines (light, moderate, thick)
@@ -152,23 +152,23 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - - Axis lines (thin, light, moderate, thick, heavy)
 - - - Gridlines (thin, light, moderate, thick, heavy)
 - - - Outlines (thin, light, moderate, thick, heavy)
-- - Mark minimum size (0, 3px, 10px)
-- - - Scaled mark minimum (0px to 44px)
-- - - Non scaled mark minimum (1px to 44px)
-- - Mark interaction box minimum (minimal, moderate, large)
+- - Mark min. size (0, 3px, 10px)
+- - - Scaled mark min. (0px to 44px)
+- - - Non scaled mark min. (1px to 44px)
+- - Interaction target (minimal, moderate, large)
 - Audio (disabled, gentle, complex)
 - - Sonification volume (low, medium, high)
 - - - High pitch volume (quiet, low, medium, high, loud)
 - - - Middle pitch volume (quiet, low, medium, high, loud)
 - - - Low pitch volume (quiet, low, medium, high, loud)
 - - Sonification pitch range (small, moderate, full)
-- - - Pitch max (9k, 12k, 15k, 18k, 20k)
-- - - Pitch min (20, 100, 250, 500, 1000)
+- - - Pitch max. (9k, 12k, 15k, 18k, 20k)
+- - - Pitch min. (20, 100, 250, 500, 1000)
 - - Instruments (disabled, all sine, all piano, custom)
 - - Tempo ticker (disabled, quiet, moderate, loud)
 - Motion (disabled, staged, slower, faster)
 - Interactivity (disabled, minimal feedback, high feedback)
-- - Interaction command window (hide, show as log, always show)
+- - Interaction console (hide, show as log, always show)
 - - Tooltips (disabled, show on focus, toggle only)
 - - Element selection (disabled, no confirmation, use confirmation)
 - - Filtering (disabled, no confirmation, use confirmation)
@@ -189,22 +189,16 @@ var parsePreferences = (str) => {
     const lines = str.trim().split('\n');
     const stack = [];
     let root = [];
-    console.log("lines",lines)
   
     lines.forEach(line => {
-      console.log("root",root)
       const indentLevel = (line.match(/-/g) || []).length;
-      console.log("indentLevel",indentLevel)
       if (!indentLevel) {console.log("FAILURE")}
   
       const cleanLine = line.replaceAll('- ',''); // Remove '- ' from the start
-      console.log("cleanline",cleanLine)
   
       const [name, optionsStr] = cleanLine.split(' (');
-      console.log("options are...",optionsStr)
   
       const options = optionsStr ? optionsStr.slice(0, -1).split(', ') : [];
-      console.log(options,"options")
   
       const newItem = {
         name: name.trim(),
@@ -216,13 +210,10 @@ var parsePreferences = (str) => {
           root.push(newItem);
       } else {
           const parent = root[root.length - 1];
-          console.log("parent",parent)
           // if (!parent.children) parent.children = [];
           let target = parent;
           if (indentLevel === 3) {
               target = parent.children[parent.children.length - 1];
-  
-              console.log("new target",target)
           }
           target.children.push(newItem)
       }
@@ -280,15 +271,38 @@ let x = generatePreferencesHTML(allPreferences)
 
 document.getElementById('menu').innerHTML = x
 
-const toggleOptions = (e) => {
-    console.log("e",e)
-    const menu = document.getElementById(e.srcElement.name + "-menu")
+const toggleMenu = (menu) => {
     const inputs = [...menu.querySelectorAll('input')]
     menu.classList.toggle("highcharts-menu-slider-disabled")
     inputs.forEach(input => input.disabled = !input.disabled)
 }
+
+const toggleOptions = (e) => {
+    console.log("e",e)
+    e.srcElement.setAttribute('data-highcharts-override', 'true')
+    const menu = document.getElementById(e.srcElement.name + "-menu")
+    menu.setAttribute('data-highcharts-override', 'true')
+    toggleMenu(menu)
+
+    const childrenBoxes = [...e.srcElement.form.parentNode.parentNode.querySelectorAll("input")]
+    childrenBoxes.forEach(box =>{
+        if (!box.getAttribute('data-highcharts-override')) {
+            box.checked = e.srcElement.checked
+        }
+    })
+
+    const childrenMenus = [...e.srcElement.form.parentNode.parentNode.querySelectorAll(".highcharts-menu-slider-wrapper")]
+    let i = 0;
+    childrenMenus.forEach(menuChild => {
+        // if the user hasn't overriden the checkbox already AND
+        // we aren't looking at the first checkbox
+        if (!menuChild.getAttribute('data-highcharts-override') && i) {
+            toggleMenu(menuChild)
+        }
+        i++
+    })
+}
 const checkboxes = [...document.querySelectorAll(".highcharts-menu-checkbox")]
-console.log("checkboxes",checkboxes)
 checkboxes.forEach(box => {
     box.addEventListener("click",toggleOptions)
 })
