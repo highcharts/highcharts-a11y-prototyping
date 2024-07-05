@@ -1,15 +1,37 @@
-<link rel="stylesheet" href="./menu.css">
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./menu.css">
+        <link rel="stylesheet" href="./chart.css">
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/sankey.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    </head>
 
-<figure class="highcharts-figure">
-    <div id="menu"></div>
-    <div id="container"></div>
-    <p class="highcharts-description">
-        (chart goes here)
-    </p>
-</figure>
+    <!-- <figure class="highcharts-figure"> -->
+    <body>
+        <div>
+            <div class="highcharts-responsive-two-columns">
+                <div class="highcharts-responsive-column-menu highcharts-hiding-children" id="menu"></div>
+                <div class="highcharts-responsive-column-chart" id="container">
+                    <figure class="highcharts-figure">
+                        <div id="container"></div>
+                        <p class="highcharts-description">
+                            Sankey charts are used to visualize data flow and volume
+                            between nodes. The wider lines indicate larger volumes.
+                        </p>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </body>
 
-<script src="./menu.js"></script>
+    <!-- </figure> -->
+
+    <script src="./props.js"></script>
+    <script src="./chart.js"></script>
+    <script src="./menu.js"></script>
+
+</html>
