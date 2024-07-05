@@ -1,5 +1,9 @@
 body {
-    padding: 3em;
+    padding: 2vh 3vw;
+}
+
+h1 {
+    margin-left:0.5em;
 }
 
 h1, h2, h3, h4, h5 h6 {
@@ -20,7 +24,6 @@ legend {
 }
 
 details, .highcharts-empty-details {
-    padding-bottom: 0.5em;
     padding-left: 1em;
 }
 
@@ -29,8 +32,9 @@ details, .highcharts-empty-details {
 }
 
 summary, .highcharts-empty-summary {
-    padding-bottom: 0.25em;
+    padding-bottom: 0.5em;
     padding-top: 0.375em;
+    padding-left: 0.5em;
 }
 
 .highcharts-menu-column {
@@ -145,4 +149,58 @@ details > summary::before {
 details[open] > summary::before {
     content: '\25BC';
     padding-right: 0;
+}
+
+summary {
+    border: 1px solid #ffffff00;
+}
+
+summary:hover {
+    cursor: pointer;
+    background-color: #f9fdff;
+    border: 1px dashed #767676;
+    border-radius: 8px;
+}
+
+/* container */
+.highcharts-responsive-two-columns {
+    display:flex;
+    flex-wrap:wrap;
+}
+
+/* columns */
+.highcharts-responsive-two-columns > * {
+    width:100%;
+    padding:1rem;
+}
+
+/* tablet breakpoint */
+@media (min-width:1079px) {
+    .highcharts-responsive-column-menu {
+        width:32%;
+    }
+    .highcharts-responsive-column-chart {
+        width:62%;
+        height: 90vh;
+    }
+}
+
+#menu {
+    border: 1px solid #767676;
+    border-radius: 10px;
+    max-height: 90vh;
+    overflow: scroll;
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+.highcharts-hiding-children .highcharts-hide-unavailable {
+    display: none;
+}
+
+.highcharts-hide-unavailable {
+    color: #767676;
+    font-weight: 100;
 }

@@ -29,6 +29,7 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - - Subtitle (small, small+, medium, medium+, large)
 - - - Mark Labels (small, small+, medium, medium+, large)
 - - - Series Labels (small, small+, medium, medium+, large)
+- - - Tooltip (small, small+, medium, medium+, large)
 - - - Legend Title (small, small+, medium, medium+, large)
 - - - Legend Labels (small, small+, medium, medium+, large)
 - - - Axis Titles (small, small+, medium, medium+, large)
@@ -168,6 +169,7 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - Tempo ticker (disabled, quiet, moderate, loud)
 - Motion (disabled, staged, slower, faster)
 - Interactivity (disabled, minimal feedback, high feedback)
+- - Pointer focus (disable, on hover, on click)
 - - Interaction console (hide, show as log, always show)
 - - Tooltips (disabled, show on focus, toggle only)
 - - Element selection (disabled, no confirmation, use confirmation)
@@ -185,56 +187,79 @@ const rawPrefs = `- Comprehension (no assistance, moderate, robust)
 - - - Previous across element (comma, custom keypress)
 - - - Parent element (AT default, up, page up, custom keypress)
 - - - First child element (AT default, down, page down, custom keypress)`
-var parsePreferences = (str) => {
+const parsePreferences = (str) => {
     const lines = str.trim().split('\n');
-    const stack = [];
     let root = [];
   
     lines.forEach(line => {
-      const indentLevel = (line.match(/-/g) || []).length;
-      if (!indentLevel) {console.log("FAILURE")}
+        const indentLevel = (line.match(/-/g) || []).length;
+        if (!indentLevel) {console.log("FAILURE")}
+    
+        const cleanLine = line.replaceAll('- ',''); // Remove '- ' from the start
+    
+        const [name, optionsStr] = cleanLine.split(' (');
+    
+        const options = optionsStr ? optionsStr.slice(0, -1).split(', ') : [];
   
-      const cleanLine = line.replaceAll('- ',''); // Remove '- ' from the start
+        let newItem = {
+            name: name.trim(),
+            domName: name.trim().toLowerCase().replace(/\s+/g, '-'),
+            options: options,
+            available: false,
+            children: []
+        };
   
-      const [name, optionsStr] = cleanLine.split(' (');
-  
-      const options = optionsStr ? optionsStr.slice(0, -1).split(', ') : [];
-  
-      const newItem = {
-        name: name.trim(),
-        options: options,
-        children: []
-      };
-  
-      if (indentLevel === 1) {
-          root.push(newItem);
-      } else {
-          const parent = root[root.length - 1];
-          // if (!parent.children) parent.children = [];
-          let target = parent;
-          if (indentLevel === 3) {
-              target = parent.children[parent.children.length - 1];
-          }
-          target.children.push(newItem)
-      }
+        if (indentLevel === 1) {
+            if (props[newItem.name] && props[newItem.name].available) {
+                newItem.available = true
+            } else {
+                props[newItem.name] = {
+                    available: false,
+                    value: "",
+                    enabled: false
+                }
+            }
+            root.push(newItem);
+        } else {
+            const parent = root[root.length - 1];
+            // if (!parent.children) parent.children = [];
+            let target = parent;
+            let propTarget = props[parent.name];
+            if (indentLevel === 3) {
+                target = parent.children[parent.children.length - 1];
+                propTarget = props[parent.name][parent.children[parent.children.length - 1].name]
+            }
+            if (propTarget.available && propTarget[newItem.name] && propTarget[newItem.name].available) {
+                newItem.available = true
+            } else {
+                propTarget[newItem.name] = {
+                    available: false,
+                    value: "",
+                    enabled: false
+                }
+            }
+            target.children.push(newItem)
+        }
     });
-  
+    console.log(props)
     return root;
-  }
+}
 const allPreferences = parsePreferences(rawPrefs)
+let allOptionsFlattened = {}
 function generatePreferencesHTML(preferences, level = 2, parentName = '') {
   let html = '';
   
   preferences.forEach(pref => {
     const headingTag = `h${level}`;
     const nextLevel = level + 1;
-    const inputName = pref.name.toLowerCase().replace(/\s+/g, '-');
+    const inputName = pref.domName;
     const children = pref.children && pref.children.length > 0
 
-    const details = children ? "details" : "div class='highcharts-empty-details'"
+    const unavailable = pref.available ? "" : "highcharts-hide-unavailable"
+    const details = children ? `details  class="${unavailable}"` : `div class="highcharts-empty-details ${unavailable}"`
     const summary = children ? "summary" : "div class='highcharts-empty-summary'"
 
-    html += `<${details}>
+    html += `<${details}">
         <${summary} class="highcharts-menu-group highcharts-menu-group-${level - 1}">
             <form>
                 <div class="highcharts-menu-column">
@@ -243,16 +268,23 @@ function generatePreferencesHTML(preferences, level = 2, parentName = '') {
                         <${headingTag}>${pref.name}<span class="highcharts-menu-hint highcharts-menu-hidden" aria-label="note: at least one child option overrides this setting.">*</span></${headingTag}>
                     </label>
                         
-                    <input class="highcharts-menu-checkbox" type="checkbox" name="${parentName+inputName}"/>
+                    <input class="highcharts-menu-checkbox" type="checkbox" name="${parentName+inputName}" ${unavailable ? 'disabled' : ''}/>
                     </div>
                     <div class="highcharts-menu-slider-line"></div>
                     <div id="${parentName+inputName}-menu" class="highcharts-menu-slider-wrapper highcharts-column-right highcharts-menu-slider-disabled">`;
                 
     pref.options.forEach((option, index) => {
         const optionName = `${parentName+inputName}-${option.toLowerCase().replace(/\s+/g, '-')}`;
+        allOptionsFlattened[optionName] = {
+            name: option,
+            domName: option.toLowerCase().replace(/\s+/g, '-'),
+            parent: pref,
+            parentName,
+            inputName
+        }
         html += `<div class="highcharts-menu-slider-option"><label for="${optionName}" data-value="${option.toLowerCase()}">
                 ${option}
-            </label><input type="radio" name="${parentName+inputName}" id="${optionName}" value="${index}" required="" disabled></div>`;
+            </label><input type="radio" name="${parentName+inputName}" id="${optionName}" class="highcharts-menu-radio" value="${index}" required="" disabled></div>`;
     });
                 
     html += `</div></div></form></${summary}>`;
@@ -267,7 +299,7 @@ function generatePreferencesHTML(preferences, level = 2, parentName = '') {
   return html;
 }
 
-let x = generatePreferencesHTML(allPreferences)
+let x = '<h1>Preferences</h1><div class="highcharts-empty-details">Hide unavailable options<input type="checkbox" class="highcharts-toggle-unavailable" checked></div>' + generatePreferencesHTML(allPreferences)
 
 document.getElementById('menu').innerHTML = x
 
@@ -302,7 +334,24 @@ const toggleOptions = (e) => {
         i++
     })
 }
+const toggleShowAvailable = (e) => {
+    e.srcElement.parentNode.parentNode.classList.toggle("highcharts-hiding-children")
+}
+const changeValue = (e) => {
+    console.log(e.srcElement)
+    console.log(e.srcElement.id,allOptionsFlattened[e.srcElement.id])
+    const option = allOptionsFlattened[e.srcElement.id]
+    const downstreamOptions = option.parent.children.length ? option.parent.children : [option.parent]
+    downstreamOptions.forEach(affectedOption => {
+        
+    })
+}
 const checkboxes = [...document.querySelectorAll(".highcharts-menu-checkbox")]
 checkboxes.forEach(box => {
     box.addEventListener("click",toggleOptions)
+})
+document.querySelector(".highcharts-toggle-unavailable").addEventListener("click",toggleShowAvailable)
+const radios = [...document.querySelectorAll(".highcharts-menu-radio")]
+radios.forEach(radio => {
+    radio.addEventListener("click",changeValue)
 })
