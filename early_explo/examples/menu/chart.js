@@ -1,5 +1,5 @@
 console.log("bork")
-Highcharts.chart('container', {
+chart = Highcharts.chart('container', {
     title: {
         text: 'Estimated US Energy Consumption in 2017',
         style: parseMenuState("title")
@@ -9,12 +9,6 @@ Highcharts.chart('container', {
       'Source: <a href=\'https://www.llnl.gov/\'> Lawrence Livermore National Laboratory</a>',
       style: parseMenuState("subtitle")
     },
-    accessibility: {
-        point: {
-            valueDescriptionFormat: '{index}. {point.from} to {point.to}, ' +
-                '{point.weight}.'
-        }
-    },
     tooltip: {
         headerFormat: null,
         pointFormat:
@@ -22,6 +16,12 @@ Highcharts.chart('container', {
       'quads',
         nodeFormat: '{point.name}: {point.sum:.2f} quads',
         style: parseMenuState("tooltip")
+    },
+    accessibility: {
+        point: {
+            valueDescriptionFormat: '{index}. {point.from} to {point.to}, ' +
+                '{point.weight}.'
+        }
     },
     series: [{
         keys: ['from', 'to', 'weight'],

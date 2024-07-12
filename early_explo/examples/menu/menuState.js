@@ -36,7 +36,7 @@ let menuState = {
                 available: true,
                 enabled: false
             },
-            seriesLabel: {
+            "Series Labels": {
                 value: "",
                 available: true,
                 enabled: false
@@ -137,6 +137,7 @@ let overrideValues = {
             },
             minimalist: {
                 "Text color": "white",
+                "Mark color": "limited white",
                 "Distinguish without color": "disabled"
             },
             maximalist: {
@@ -175,10 +176,10 @@ const propNameMap = {
 }
 const menuStateValueMap = {
     fontSize: {
-        small: "8pt",
-        "small+": "10pt",
-        medium: "12pt",
-        "medium+": "14pt",
-        large: "16pt"
+        small: "9pt",
+        "small+": "12pt",
+        medium: "15pt",
+        "medium+": "18pt",
+        large: "21pt"
     }
 }

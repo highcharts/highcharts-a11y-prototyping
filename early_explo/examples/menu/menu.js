@@ -335,44 +335,55 @@ const toggleOptions = (e) => {
 const toggleShowAvailable = (e) => {
     e.srcElement.parentNode.parentNode.classList.toggle("highcharts-hiding-children")
 }
-const changeValue = (e) => {
+const runMenuFunction = option => {
+    let parentGroup = option.option.parent ? option.option.parent : null
+    let parentGroupOfParent = parentGroup && parentGroup.parent ? parentGroup.parent : null
+    // all three of these will attempt to run conditionally, but only one will be able to
+    menuFunctions?.[parentGroupOfParent?.name]?.[parentGroup?.name]?.[option?.option?.name]?.change(option?.targetName)
+    menuFunctions?.[parentGroup?.name]?.[option?.option?.name]?.change(option?.targetName)
+    menuFunctions?.[option?.option?.name]?.change(option?.targetName)
+}
+const changeValue = (option) => {
+    document.getElementById(option.id).checked = true
+    runMenuFunction(option)
+}
+const processRadioSelection = (e) => {
     // overall, the process on user interaction:
     // option is chosen by user
     // we set menu state
     // we then run a menuFunction to change the chart to match
     // (menuFunction relies on propNameMap and menuStateValueMap for determining actual values for things)
     const option = allOptionsFlattened[e.srcElement.id]
-    let childrenOfOption = option.parent.children.length ? option.parent.children : [option.parent]
+    let childrenOfOption = option.parent.children.length ? [...option.parent.children] : []
+    childrenOfOption.push(option.parent)
     let index = option.parent.options.findIndex(d => d === option.name)
     // we also need to check the children of children!
     // we try to match try to match name, otherwise check for overrides, otherwise use index
     // use new value to pass on to childmost level 
-    const findDownstreamOptionName = (targetOption, sourceName) => {
+    const findDownstreamOption = (targetOption, sourceName) => {
         let targetName = targetOption.options.find(d => d === sourceName)
+        let parentGroup = targetOption.parent ? targetOption.parent : null
+        let parentGroupOfParent = parentGroup && parentGroup.parent ? parentGroup.parent : null
+
         if (!targetName) {
-            let parentGroup = targetOption.parent ? targetOption.parent : null
-            let parentGroupOfParent = parentGroup && parentGroup.parent ? parentGroup.parent : null
-            targetName = !parentGroupOfParent && overrideValues[parentGroup.name] && overrideValues[parentGroup.name].options[sourceName] 
+            targetName = !parentGroupOfParent && overrideValues?.[parentGroup?.name]?.options?.[sourceName] 
                 ? overrideValues[parentGroup.name].options[sourceName][targetOption.name] 
-                : parentGroupOfParent && overrideValues[parentGroup.name] && overrideValues[parentGroup.name][parentGroupOfParent.name] && overrideValues[parentGroup.name][parentGroupOfParent.name].options[sourceName] ?overrideValues[parentGroup.name][parentGroupOfParent.name].options[sourceName][targetOption.name] : undefined
+                : parentGroupOfParent && overrideValues?.[parentGroup?.name]?.[parentGroupOfParent?.name]?.options?.[sourceName] ? overrideValues[parentGroup.name][parentGroupOfParent.name].options[sourceName][targetOption.name] : undefined
         }
         targetName = targetName || targetOption.options[index]
-
-        parentGroup = targetOption.parent ? targetOption.parent : null
-        parentGroupOfParent = parentGroup && parentGroup.parent ? parentGroup.parent : null
         let id = `${parentGroupOfParent ? parentGroupOfParent.domName + '-' : ''}${parentGroup ? parentGroup.domName + '-' : ''}${targetOption.domName}-${targetName}`
         id = id.trim().toLowerCase().replace(/\s+/g, '-')
-        return { id, targetName }
+        return { id, targetName, option:targetOption }
     }
     childrenOfOption.forEach(affectedOption => {
         if (affectedOption.available) {
-            const correspondingOption = findDownstreamOptionName(affectedOption, option.name)
-            document.getElementById(correspondingOption.id).checked = true
+            const correspondingOption = findDownstreamOption(affectedOption, option.name)
+            changeValue(correspondingOption)
             if (affectedOption.children.length) {
                 affectedOption.children.forEach(childmost => {
                     if (childmost.available) {
-                        const childmostCorrespondingOption = findDownstreamOptionName(childmost, correspondingOption.targetName)
-                        document.getElementById(childmostCorrespondingOption.id).checked = true
+                        const childmostCorrespondingOption = findDownstreamOption(childmost, correspondingOption.targetName)
+                        changeValue(childmostCorrespondingOption)
                     }
                 })
             }
@@ -386,5 +397,5 @@ checkboxes.forEach(box => {
 document.querySelector(".highcharts-toggle-unavailable").addEventListener("click",toggleShowAvailable)
 const radios = [...document.querySelectorAll(".highcharts-menu-radio")]
 radios.forEach(radio => {
-    radio.addEventListener("click",changeValue)
+    radio.addEventListener("click",processRadioSelection)
 })
