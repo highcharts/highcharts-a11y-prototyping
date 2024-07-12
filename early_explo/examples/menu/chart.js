@@ -1,38 +1,13 @@
 console.log("bork")
-const propNameMap = {
-    title: "Title",
-    subtitle: "Subtitle",
-    tooltip: "Tooltip"
-}
-const propValueMap = {
-    fontSize: {
-        small: "8pt",
-        "small+": "10pt",
-        medium: "12pt",
-        "medium+": "14pt",
-        large: "16pt"
-    }
-}
-const parseProps = (highchartsPropName) => {
-    let styleObject = {}
-    let propName = propNameMap[highchartsPropName]
-    console.log(highchartsPropName)
-    props.Text["Font Size"].Title.value ? propMap["Font Size"][props.Text["Font Size"].Title.value] : undefined
-    if (props.Text["Font Size"][propName].value) {
-        styleObject.fontSize = propValueMap.fontSize[props.Text["Font Size"][propName].value]
-    }
-    console.log(styleObject)
-    return styleObject
-}
 Highcharts.chart('container', {
     title: {
         text: 'Estimated US Energy Consumption in 2017',
-        style: parseProps("title")
+        style: parseMenuState("title")
     },
     subtitle: {
         text:
       'Source: <a href=\'https://www.llnl.gov/\'> Lawrence Livermore National Laboratory</a>',
-      style: parseProps("subtitle")
+      style: parseMenuState("subtitle")
     },
     accessibility: {
         point: {
@@ -46,7 +21,7 @@ Highcharts.chart('container', {
       '{point.fromNode.name} \u2192 {point.toNode.name}: {point.weight:.2f} ' +
       'quads',
         nodeFormat: '{point.name}: {point.sum:.2f} quads',
-        style: parseProps("tooltip")
+        style: parseMenuState("tooltip")
     },
     series: [{
         keys: ['from', 'to', 'weight'],
