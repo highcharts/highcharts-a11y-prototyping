@@ -1,4 +1,8 @@
-let props = {
+// option is chosen
+// we set menu state
+// we then run a menuFunction to change the chart to match
+// menuFunction relies on propNameMap and menuStateValueMap for determining actual values for things
+let menuState = {
     Comprehension: {
         value: "",
         available: true,
@@ -123,5 +127,58 @@ let props = {
             available: true,
             enabled: false
         }
+    }
+}
+let overrideValues = {
+    "Color and contrast": {
+        options: {
+            disabled: {
+                "Text color": "black"
+            },
+            minimalist: {
+                "Text color": "white",
+                "Distinguish without color": "disabled"
+            },
+            maximalist: {
+                "Text color": "black",
+                "Mark color": "disabled",
+                "Distinguish without color": "enabled"
+            }
+        },
+        "Distinguish without color": {
+            options: {
+                enabled: {
+                    "Fill patterns": "high-contrast"
+                }
+            }
+        }
+    }
+    // Text: {
+    //     "minimalist": {
+    //         "Font Size": "small",
+    //         "Font Weight": "light"
+    //     },
+    //     "moderate": {
+    //         "Font Size": "medium",
+    //         "Font Weight": "regular"
+    //     },
+    //     "maximals": {
+    //         "Font Size": "large",
+    //         "Font Weight": "bold"
+    //     },
+    // }
+}
+const propNameMap = {
+    title: "Title",
+    subtitle: "Subtitle",
+    tooltip: "Tooltip"
+}
+const menuStateValueMap = {
+    fontSize: {
+        small: "8pt",
+        "small+": "10pt",
+        medium: "12pt",
+        "medium+": "14pt",
+        large: "16pt"
     }
 }
