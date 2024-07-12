@@ -193,7 +193,6 @@ const parsePreferences = (str) => {
   
     lines.forEach(line => {
         const indentLevel = (line.match(/-/g) || []).length;
-        if (!indentLevel) {console.log("FAILURE")}
     
         const cleanLine = line.replaceAll('- ',''); // Remove '- ' from the start
     
@@ -206,14 +205,15 @@ const parsePreferences = (str) => {
             domName: name.trim().toLowerCase().replace(/\s+/g, '-'),
             options: options,
             available: false,
+            parent: null,
             children: []
         };
   
         if (indentLevel === 1) {
-            if (props[newItem.name] && props[newItem.name].available) {
+            if (menuState[newItem.name] && menuState[newItem.name].available) {
                 newItem.available = true
             } else {
-                props[newItem.name] = {
+                menuState[newItem.name] = {
                     available: false,
                     value: "",
                     enabled: false
@@ -224,24 +224,24 @@ const parsePreferences = (str) => {
             const parent = root[root.length - 1];
             // if (!parent.children) parent.children = [];
             let target = parent;
-            let propTarget = props[parent.name];
+            let menuStateTarget = menuState[parent.name];
             if (indentLevel === 3) {
                 target = parent.children[parent.children.length - 1];
-                propTarget = props[parent.name][parent.children[parent.children.length - 1].name]
+                menuStateTarget = menuState[parent.name][parent.children[parent.children.length - 1].name]
             }
-            if (propTarget.available && propTarget[newItem.name] && propTarget[newItem.name].available) {
+            if (menuStateTarget.available && menuStateTarget[newItem.name] && menuStateTarget[newItem.name].available) {
                 newItem.available = true
             } else {
-                propTarget[newItem.name] = {
+                menuStateTarget[newItem.name] = {
                     available: false,
                     value: "",
                     enabled: false
                 }
             }
+            newItem.parent = target
             target.children.push(newItem)
         }
     });
-    console.log(props)
     return root;
 }
 const allPreferences = parsePreferences(rawPrefs)
@@ -308,9 +308,7 @@ const toggleMenu = (menu) => {
     menu.classList.toggle("highcharts-menu-slider-disabled")
     inputs.forEach(input => input.disabled = !input.disabled)
 }
-
 const toggleOptions = (e) => {
-    console.log("e",e)
     e.srcElement.setAttribute('data-highcharts-override', 'true')
     const menu = document.getElementById(e.srcElement.name + "-menu")
     menu.setAttribute('data-highcharts-override', 'true')
@@ -337,13 +335,59 @@ const toggleOptions = (e) => {
 const toggleShowAvailable = (e) => {
     e.srcElement.parentNode.parentNode.classList.toggle("highcharts-hiding-children")
 }
-const changeValue = (e) => {
-    console.log(e.srcElement)
-    console.log(e.srcElement.id,allOptionsFlattened[e.srcElement.id])
+const runMenuFunction = option => {
+    let parentGroup = option.option.parent ? option.option.parent : null
+    let parentGroupOfParent = parentGroup && parentGroup.parent ? parentGroup.parent : null
+    // all three of these will attempt to run conditionally, but only one will be able to
+    menuFunctions?.[parentGroupOfParent?.name]?.[parentGroup?.name]?.[option?.option?.name]?.change(option?.targetName)
+    menuFunctions?.[parentGroup?.name]?.[option?.option?.name]?.change(option?.targetName)
+    menuFunctions?.[option?.option?.name]?.change(option?.targetName)
+}
+const changeValue = (option) => {
+    document.getElementById(option.id).checked = true
+    runMenuFunction(option)
+}
+const processRadioSelection = (e) => {
+    // overall, the process on user interaction:
+    // option is chosen by user
+    // we set menu state
+    // we then run a menuFunction to change the chart to match
+    // (menuFunction relies on propNameMap and menuStateValueMap for determining actual values for things)
     const option = allOptionsFlattened[e.srcElement.id]
-    const downstreamOptions = option.parent.children.length ? option.parent.children : [option.parent]
-    downstreamOptions.forEach(affectedOption => {
-        
+    let childrenOfOption = option.parent.children.length ? [...option.parent.children] : []
+    childrenOfOption.push(option.parent)
+    let index = option.parent.options.findIndex(d => d === option.name)
+    // we also need to check the children of children!
+    // we try to match try to match name, otherwise check for overrides, otherwise use index
+    // use new value to pass on to childmost level 
+    const findDownstreamOption = (targetOption, sourceName) => {
+        let targetName = targetOption.options.find(d => d === sourceName)
+        let parentGroup = targetOption.parent ? targetOption.parent : null
+        let parentGroupOfParent = parentGroup && parentGroup.parent ? parentGroup.parent : null
+
+        if (!targetName) {
+            targetName = !parentGroupOfParent && overrideValues?.[parentGroup?.name]?.options?.[sourceName] 
+                ? overrideValues[parentGroup.name].options[sourceName][targetOption.name] 
+                : parentGroupOfParent && overrideValues?.[parentGroup?.name]?.[parentGroupOfParent?.name]?.options?.[sourceName] ? overrideValues[parentGroup.name][parentGroupOfParent.name].options[sourceName][targetOption.name] : undefined
+        }
+        targetName = targetName || targetOption.options[index]
+        let id = `${parentGroupOfParent ? parentGroupOfParent.domName + '-' : ''}${parentGroup ? parentGroup.domName + '-' : ''}${targetOption.domName}-${targetName}`
+        id = id.trim().toLowerCase().replace(/\s+/g, '-')
+        return { id, targetName, option:targetOption }
+    }
+    childrenOfOption.forEach(affectedOption => {
+        if (affectedOption.available) {
+            const correspondingOption = findDownstreamOption(affectedOption, option.name)
+            changeValue(correspondingOption)
+            if (affectedOption.children.length) {
+                affectedOption.children.forEach(childmost => {
+                    if (childmost.available) {
+                        const childmostCorrespondingOption = findDownstreamOption(childmost, correspondingOption.targetName)
+                        changeValue(childmostCorrespondingOption)
+                    }
+                })
+            }
+        }
     })
 }
 const checkboxes = [...document.querySelectorAll(".highcharts-menu-checkbox")]
@@ -353,5 +397,5 @@ checkboxes.forEach(box => {
 document.querySelector(".highcharts-toggle-unavailable").addEventListener("click",toggleShowAvailable)
 const radios = [...document.querySelectorAll(".highcharts-menu-radio")]
 radios.forEach(radio => {
-    radio.addEventListener("click",changeValue)
+    radio.addEventListener("click",processRadioSelection)
 })
