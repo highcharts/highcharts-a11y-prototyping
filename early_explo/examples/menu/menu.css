@@ -204,3 +204,8 @@ input:hover {
     color: #767676;
     font-weight: 100;
 }
+
+.highcharts-visible-alt {
+    display: block;
+    position: absolute;
+}
