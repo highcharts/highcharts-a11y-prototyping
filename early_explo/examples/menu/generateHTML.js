@@ -1,40 +1,52 @@
-function generatePreferencesHTML(preferences, level = 2) {
+
+function generatePreferencesHTML(preferences, level = 2, parentName = '') {
   let html = '';
   
   preferences.forEach(pref => {
     const headingTag = `h${level}`;
     const nextLevel = level + 1;
-    const inputName = pref.name.toLowerCase().replace(/\s+/g, '-');
-    
-    html += `<details>
-      <summary class="highcharts-menu-group highcharts-menu-group-${level - 1}">
-        <${headingTag}>${pref.name}<span class="highcharts-menu-hint highcharts-menu-hidden">*</span></${headingTag}>
-      </summary>`;
-    
-    if (pref.children && pref.children.length > 0) {
-      html += generatePreferencesHTML(pref.children, nextLevel);
+    const inputName = pref.domName;
+    const children = pref.children && pref.children.length > 0
+
+    const unavailable = pref.available ? "" : "highcharts-hide-unavailable"
+    const details = children ? `details  class="${unavailable}"` : `div class="highcharts-empty-details ${unavailable}"`
+    const summary = children ? "summary" : "div class='highcharts-empty-summary'"
+
+    html += `<${details}">
+        <${summary} class="highcharts-menu-group highcharts-menu-group-${level - 1}">
+            <form>
+                <div class="highcharts-menu-column">
+                    <div class="highcharts-column-left highcharts-column-level-${level - 1}">
+                    <label class="highcharts-menu-checkbox-label highcharts-menu-checkbox-label-${level - 1}" for="${parentName+inputName}">
+                        <${headingTag}>${pref.name}<span class="highcharts-menu-hint highcharts-menu-hidden" aria-label="note: at least one child option overrides this setting.">*</span></${headingTag}>
+                    </label>
+                        
+                    <input class="highcharts-menu-checkbox highcharts-menu-hidden-checkbox" type="checkbox" name="${parentName+inputName}" ${unavailable ? 'disabled' : ''}/>
+                    </div>
+                    <div class="highcharts-menu-slider-line"></div>
+                    <div id="${parentName+inputName}-menu" class="highcharts-menu-slider-wrapper highcharts-column-right ${unavailable ? 'highcharts-menu-slider-disabled' : ''}">`;
+                
+    pref.options.forEach((option, index) => {
+        const optionName = `${parentName+inputName}-${option.toLowerCase().replace(/\s+/g, '-')}`;
+        allOptionsFlattened[optionName] = {
+            name: option,
+            domName: option.toLowerCase().replace(/\s+/g, '-'),
+            parent: pref,
+            parentName,
+            inputName
+        }
+        html += `<div class="highcharts-menu-slider-option"><label for="${optionName}" data-value="${option.toLowerCase()}">
+                ${option}
+            </label><input type="radio" name="${parentName+inputName}" id="${optionName}" class="highcharts-menu-radio" value="${index}" required="" ${option === 'default' ? 'checked' : ''} ${unavailable ? 'disabled' : ''}></div>`;
+    });
+                
+    html += `</div></div></form></${summary}>`;
+    const newParent = parentName+inputName+'-'
+    if (children) {
+      html += generatePreferencesHTML(pref.children, nextLevel, newParent);
     }
     
-    html += `<form>
-      <div class="highcharts-menu-column">
-        <div class="highcharts-column-left">
-          <label class="highcharts-menu-checkbox-label-${level - 1}" for="${inputName}" aria-label="Enable ${pref.name}">${pref.name}<span class="highcharts-menu-indeterminant highcharts-menu-hidden">, note: at least one child option overrides this setting.</span></label>
-          <input class="highcharts-menu-checkbox" type="checkbox" name="${inputName}-enabled"/>
-        </div>
-        <div class="highcharts-menu-slider-wrapper highcharts-column-right">
-          <div class="highcharts-menu-slider-line"></div>`;
-    
-    pref.options.forEach((option, index) => {
-      const optionName = `${inputName}-${option.toLowerCase().replace(/\s+/g, '-')}`;
-      html += `<label for="${optionName}" data-value="${option.toLowerCase()}">${option}</label>
-          <input type="radio" name="${optionName}" id="${optionName}" value="${index}" required="" disabled>`;
-    });
-    
-    html += `</div>
-      </div>
-    </form>`;
-    
-    html += '</details>';
+    html += `</${details}>`;
   });
 
   return html;
