@@ -44,3 +44,22 @@
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
+
+.highcharts-using-fills-low .highcharts-link {
+    fill-opacity: 0.35;
+}
+.highcharts-using-fills-high .highcharts-link {
+    fill-opacity: 0.6;
+}
+.highcharts-using-fills-low .highcharts-link.highcharts-point-inactive {
+    fill-opacity: 0.05;
+}
+.highcharts-using-fills-high .highcharts-link.highcharts-point-inactive {
+    fill-opacity: 0.1;
+}
+.highcharts-using-fills-low .highcharts-link.highcharts-point-hover {
+    fill-opacity: 0.7;
+}
+.highcharts-using-fills-high .highcharts-link.highcharts-point-hover {
+    fill-opacity: 1;
+}
