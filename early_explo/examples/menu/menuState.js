@@ -46,22 +46,22 @@ let menuState = {
             value: "",
             available: true,
             enabled: false,
-            title: {
+            Title: {
                 value: "",
                 available: true,
                 enabled: false
             },
-            subtitle: {
+            Subtitle: {
                 value: "",
                 available: true,
                 enabled: false
             },
-            tooltip: {
+            Tooltip: {
                 value: "",
                 available: true,
                 enabled: false
             },
-            seriesLabel: {
+            "Series Labels": {
                 value: "",
                 available: true,
                 enabled: false
@@ -132,17 +132,17 @@ let menuState = {
 let overrideValues = {
     "Color and contrast": {
         options: {
-            disabled: {
+            default: {
                 "Text color": "black"
             },
             minimalist: {
-                "Text color": "white",
+                "Text color": "custom",
                 "Mark color": "limited white",
-                "Distinguish without color": "disabled"
+                "Distinguish without color": "default"
             },
             maximalist: {
                 "Text color": "black",
-                "Mark color": "disabled",
+                "Mark color": "default",
                 "Distinguish without color": "enabled"
             }
         },
@@ -154,20 +154,6 @@ let overrideValues = {
             }
         }
     }
-    // Text: {
-    //     "minimalist": {
-    //         "Font Size": "small",
-    //         "Font Weight": "light"
-    //     },
-    //     "moderate": {
-    //         "Font Size": "medium",
-    //         "Font Weight": "regular"
-    //     },
-    //     "maximals": {
-    //         "Font Size": "large",
-    //         "Font Weight": "bold"
-    //     },
-    // }
 }
 const propNameMap = {
     title: "Title",
@@ -176,10 +162,10 @@ const propNameMap = {
 }
 const menuStateValueMap = {
     fontSize: {
-        small: "9pt",
-        "small+": "12pt",
-        medium: "15pt",
-        "medium+": "18pt",
-        large: "21pt"
+        small: "0.75em",
+        "small+": "1em",
+        medium: "1.25em",
+        "medium+": "1.5em",
+        large: "1.75em"
     }
 }
