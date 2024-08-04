@@ -1,12 +1,15 @@
 let chart;
+let shadowChart;
 const menuFunctions = {
     Comprehension: {
         change: option => {},
         "Alt text appearance": {
             change: (option)=> {
                 if (option.indexOf("show") > -1) {
+                    document.getElementById("container").setAttribute("style","pointer-events: fill;")
                     const srMajorRegion = document.getElementById("highcharts-screen-reader-region-before-0").children[0]
-                    srMajorRegion.setAttribute("style","")
+                    srMajorRegion.setAttribute("style","font-size: 1.5em;")
+                    srMajorRegion.querySelector("button").setAttribute("style","font-size: 1em;")
                     if (option.indexOf("all") > -1) {
                         document.getElementById("container").querySelectorAll('path[aria-label]').forEach(e => {
                             let label = document.createElement("div")
@@ -20,6 +23,7 @@ const menuFunctions = {
                         document.getElementById("container").querySelectorAll('.highcharts-visible-alt').forEach(e => e.remove())
                     }
                 } else {
+                    document.getElementById("container").setAttribute("style","overflow: hidden; pointer-events: fill;")
                     const srMajorRegion = document.getElementById("highcharts-screen-reader-region-before-0").children[0]
                     console.log(option)
                     srMajorRegion.setAttribute("style","position: absolute; width: 1px; height: 1px; overflow: hidden; white-space: nowrap; clip: rect(1px, 1px, 1px, 1px); margin-top: -3px; opacity: 0.01;")
@@ -37,7 +41,7 @@ const menuFunctions = {
                     chart.update({
                         title: {
                             style: {
-                                fontSize: menuStateValueMap.fontSize[option]
+                                fontSize: option === 'default' ? shadowChart.title.fontSize || '1em' : menuStateValueMap.fontSize[option]
                             }
                         }
                     })
@@ -48,7 +52,7 @@ const menuFunctions = {
                     chart.update({
                         subtitle: {
                             style: {
-                                fontSize: menuStateValueMap.fontSize[option]
+                                fontSize: option === 'default' ? shadowChart.subtitle.fontSize || '1em' : menuStateValueMap.fontSize[option]
                             }
                         }
                     })
@@ -59,7 +63,7 @@ const menuFunctions = {
                     chart.update({
                         tooltip: {
                             style: {
-                                fontSize: menuStateValueMap.fontSize[option]
+                                fontSize: option === 'default' ? shadowChart.tooltip.fontSize || '1em' : menuStateValueMap.fontSize[option]
                             }
                         }
                     })
@@ -72,7 +76,7 @@ const menuFunctions = {
                             series: {
                                 dataLabels: {
                                     style: {
-                                        fontSize: menuStateValueMap.fontSize[option]
+                                        fontSize: option === 'default' ? shadowChart.series.fontSize || '1em' : menuStateValueMap.fontSize[option]
                                     }
                                 }
                             }
@@ -82,45 +86,54 @@ const menuFunctions = {
             }
         },
         "Font Weight": {
-            change: option => {
-                chart.update({
-                    title: {
-                        style: {
-                            fontWeight: option
+            change: option => {},
+            Title: {
+                change: option => {
+                    chart.update({
+                        title: {
+                            style: {
+                                fontWeight: option === 'default' ? shadowChart.title.fontWeight || 'regular' : option
+                            }
                         }
-                    },
-                    subtitle: {
-                        style: {
-                            fontWeight: option
+                    })
+                },
+            },
+            Subtitle: {
+                change: option => {
+                    chart.update({
+                        subtitle: {
+                            style: {
+                                fontWeight: option === 'default' ? shadowChart.subtitle.fontWeight || 'regular' : option
+                            }
                         }
-                    },
-                    tooltip: {
-                        style: {
-                            fontWeight: option
+                    })
+                },
+            },
+            Tooltip: {
+                change: option => {
+                    chart.update({
+                        tooltip: {
+                            style: {
+                                fontWeight: option === 'default' ? shadowChart.tooltip.fontWeight || 'regular' : option
+                            }
                         }
-                    },
-                    // plotOptions: {
-                        series: {
-                            dataLabels: {
-                                style: {
-                                    fontWeight: option
+                    })
+                },
+            },
+            "Series Labels": {
+                change: option => {
+                    chart.update({
+                        plotOptions: {
+                            series: {
+                                dataLabels: {
+                                    style: {
+                                        fontWeight: option === 'default' ? shadowChart.series.fontWeight || 'regular' : option
+                                    }
                                 }
                             }
                         }
-                    // }
-                })
-            },
-            title: {
-                change: option => {},
-            },
-            subtitle: {
-                change: option => {},
-            },
-            tooltip: {
-                change: option => {},
-            },
-            seriesLabel: {
-                change: option => {},
+                    })
+                },
             }
         }
     },
@@ -131,28 +144,26 @@ const menuFunctions = {
                 chart.update({
                     title: {
                         style: {
-                            color: option
+                            color: option === 'default' || option === 'custom' ? shadowChart.title.color || "#333333" : option
                         }
                     },
                     subtitle: {
                         style: {
-                            color: option
+                            color: option === 'default'|| option === 'custom' ? shadowChart.subtitle.color || "#333333" : option
                         }
                     },
                     tooltip: {
                         style: {
-                            color: option
+                            color: option === 'default' || option === 'custom' ? shadowChart.tooltip.color || "#333333" : option
                         }
                     },
-                    // plotOptions: {
-                        series: {
-                            dataLabels: {
-                                style: {
-                                    color: option
-                                }
+                    series: {
+                        dataLabels: {
+                            style: {
+                                color: option === 'default' ? shadowChart.tooltip.color || "#333333" : option === 'custom' ? 'white' : option
                             }
                         }
-                    // }
+                    }
                 })
             },
         },
@@ -173,7 +184,26 @@ const menuFunctions = {
         "Distinguish without color": {
             change: option => {},
             "Fill patterns": {
-                change: option => {},
+                change: option => {
+                    console.log("fill patterns!",option)
+                    if (option === 'default') {
+                        document.querySelector('.highcharts-root').setAttribute('class','highcharts-root')
+                        chart.update({
+                            series:[{
+                                data: [...sankeyData],
+                                nodes: [...sankeyNodes]
+                            }]
+                        })
+                    } else {
+                        document.querySelector('.highcharts-root').setAttribute('class',`highcharts-root ${option === 'low contrast' ? 'highcharts-using-fills-low' : 'highcharts-using-fills-high'}`)
+                        chart.update({
+                            series: [{
+                                data: [...patternData],
+                                nodes: [...patternNodes]
+                            }]
+                        })
+                    }
+                },
             }
         }
     },
