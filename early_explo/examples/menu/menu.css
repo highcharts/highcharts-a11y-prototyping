@@ -133,6 +133,10 @@ input[type=checkbox] {
     top: 0.4em;
 }
 
+.highcharts-menu-hidden-checkbox {
+    display: none;
+}
+
 details > summary {
     list-style-type: none;
 }
