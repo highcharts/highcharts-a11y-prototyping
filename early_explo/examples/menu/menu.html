@@ -17,15 +17,37 @@
         <div>
             <div class="highcharts-responsive-two-columns">
                 <div class="highcharts-responsive-column-menu highcharts-hiding-children" id="menu"></div>
-                <div class="highcharts-responsive-column-chart" id="container">
+                <div class="highcharts-responsive-column-chart">
                     <figure class="highcharts-figure">
                         <div id="container"></div>
                         <div id="hidden-container"></div>
-                        <p class="highcharts-description">
+                        <!-- <p class="highcharts-description">
                             Sankey charts are used to visualize data flow and volume
                             between nodes. The wider lines indicate larger volumes.
-                        </p>
+                        </p> -->
                     </figure>
+                    <div class="highcharts-responsive-two-columns">
+                        <div class="highcharts-menu-halfwidth">
+                            <figure class="highcharts-figure">
+                                <div id="bar-container"></div>
+                                <!-- <p class="highcharts-description">
+                                    Chart showing stacked columns for comparing quantities. Stacked charts
+                                    are often used to visualize data that accumulates to a sum. This chart
+                                    is showing data labels for each individual section of the stack.
+                                </p> -->
+                            </figure>
+                        </div>
+                        <div class="highcharts-menu-halfwidth">
+                            <figure class="highcharts-figure">
+                                <div id="line-container"></div>
+                                <!-- <p class="highcharts-description">
+                                    Chart showing stacked columns for comparing quantities. Stacked charts
+                                    are often used to visualize data that accumulates to a sum. This chart
+                                    is showing data labels for each individual section of the stack.
+                                </p> -->
+                            </figure>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,12 +100,14 @@
     </body>
 
     <!-- </figure> -->
-    <script src="./datasets.js"></script>
     <script src="./colorUtilities.js"></script>
+    <script src="./datasets.js"></script>
     <script src="./menuState.js"></script>
     <script src="./menuFunctions.js"></script>
     <script src="./generateHTML.js"></script>
     <script src="./parsePreferences.js"></script>
+    <script src="./barChart.js"></script>
+    <script src="./lineChart.js"></script>
     <script src="./chart.js"></script>
     <script src="./menu.js"></script>
 
