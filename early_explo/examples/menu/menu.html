@@ -9,6 +9,7 @@
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <script src="https://code.highcharts.com/modules/pattern-fill.js"></script>
     </head>
 
     <!-- <figure class="highcharts-figure"> -->
@@ -16,22 +17,97 @@
         <div>
             <div class="highcharts-responsive-two-columns">
                 <div class="highcharts-responsive-column-menu highcharts-hiding-children" id="menu"></div>
-                <div class="highcharts-responsive-column-chart" id="container">
+                <div class="highcharts-responsive-column-chart">
                     <figure class="highcharts-figure">
                         <div id="container"></div>
-                        <p class="highcharts-description">
+                        <div id="hidden-container"></div>
+                        <!-- <p class="highcharts-description">
                             Sankey charts are used to visualize data flow and volume
                             between nodes. The wider lines indicate larger volumes.
-                        </p>
+                        </p> -->
                     </figure>
+                    <div class="highcharts-responsive-two-columns">
+                        <div class="highcharts-menu-halfwidth">
+                            <figure class="highcharts-figure">
+                                <div id="bar-container"></div>
+                                <!-- <p class="highcharts-description">
+                                    Chart showing stacked columns for comparing quantities. Stacked charts
+                                    are often used to visualize data that accumulates to a sum. This chart
+                                    is showing data labels for each individual section of the stack.
+                                </p> -->
+                            </figure>
+                        </div>
+                        <div class="highcharts-menu-halfwidth">
+                            <figure class="highcharts-figure">
+                                <div id="line-container"></div>
+                                <!-- <p class="highcharts-description">
+                                    Chart showing stacked columns for comparing quantities. Stacked charts
+                                    are often used to visualize data that accumulates to a sum. This chart
+                                    is showing data labels for each individual section of the stack.
+                                </p> -->
+                            </figure>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div>
+            <svg aria-hidden="true" style="position:absolute;opacity:0;pointer-events:none;">
+                <defs aria-hidden="true">
+                    <pattern id="highcharts-pattern-0-156-0" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="5" height="5" x="0" y="0" patternTransform="scale(1.4 1.4)">
+                    <path d="M 0 0 L 5 5 M 4.5 -0.5 L 5.5 0.5 M -0.5 4.5 L 0.5 5.5" stroke="rgba(0,156,0,1)" stroke-width="2" fill="none">
+                    </path>
+                    </pattern>
+                    <pattern id="highcharts-pattern-26-141-255" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="5" height="5" x="0" y="0" patternTransform="scale(1.4 1.4)">
+                    <path d="M 0 5 L 5 0 M -0.5 0.5 L 0.5 -0.5 M 4.5 5.5 L 5.5 4.5" stroke="rgba(26,141,255,1)" stroke-width="2" fill="none">
+                    </path>
+                    </pattern>
+                    <pattern id="highcharts-pattern-152-152-152" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="5" height="5" x="0" y="0" patternTransform="scale(1.4 1.4)">
+                    <path d="M 2 0 L 2 5 M 4 0 L 4 5" stroke="rgba(152,152,152,1)" stroke-width="2" fill="none">
+                    </path>
+                    </pattern>
+                    <pattern id="highcharts-pattern-116-255-231" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="5" height="5" x="0" y="0" patternTransform="scale(1.4 1.4)">
+                    <path d="M 0 2 L 5 2 M 0 4 L 5 4" stroke="rgba(116,255,231,1)" stroke-width="2" fill="none">
+                    </path>
+                    </pattern>
+                    <pattern id="highcharts-pattern-140-255-116" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="5" height="5" x="0" y="0" patternTransform="scale(1.4 1.4)">
+                    <path d="M 0 1.5 L 2.5 1.5 L 2.5 0 M 2.5 5 L 2.5 3.5 L 5 3.5" stroke="rgba(140,255,116,1)" stroke-width="2" fill="none">
+                    </path>
+                    </pattern>
+                    <pattern id="highcharts-pattern-255-141-161" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="10" height="10" x="0" y="0">
+                    <path d="M 0 0 L 5 10 L 10 0" stroke="rgba(255,141,161,1)" stroke-width="2" fill="none">
+                    </path>
+                    </pattern>
+                    <pattern id="highcharts-pattern-244-192-255" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="10" height="10" x="0" y="0">
+                    <path d="M 3 3 L 8 3 L 8 8 L 3 8 Z" stroke="rgba(244,192,255,1)" stroke-width="2" fill="none">
+                    </path>
+                    </pattern>
+                    <pattern id="highcharts-pattern-230-230-230" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="10" height="10" x="0" y="0">
+                    <path d="M 5 5 m -4 0 a 4 4 0 1 1 8 0 a 4 4 0 1 1 -8 0" stroke="rgba(230,230,230,1)" stroke-width="2" fill="none">
+                    </path>
+                    </pattern>
+                    <pattern id="highcharts-pattern-249-231-159" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="10" height="10" x="0" y="0">
+                    <path d="M 0 0 L 10 10 M 9 -1 L 11 1 M -1 9 L 1 11" stroke="rgba(249,231,159,1)" stroke-width="2" fill="none">
+                    </path>
+                    </pattern>
+                    <pattern id="highcharts-pattern-255-165-0" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="10" height="10" x="0" y="0">
+                    <path d="M 0 10 L 10 0 M -1 1 L 1 -1 M 9 11 L 11 9" stroke="rgba(255,165,0,1)" stroke-width="2" fill="none">
+                    </path>
+                    </pattern>
+                    </defs>                    
+            </svg>
         </div>
     </body>
 
     <!-- </figure> -->
+    <script src="./colorUtilities.js"></script>
+    <script src="./datasets.js"></script>
     <script src="./menuState.js"></script>
     <script src="./menuFunctions.js"></script>
+    <script src="./generateHTML.js"></script>
+    <script src="./parsePreferences.js"></script>
+    <script src="./barChart.js"></script>
+    <script src="./lineChart.js"></script>
     <script src="./chart.js"></script>
     <script src="./menu.js"></script>
 
