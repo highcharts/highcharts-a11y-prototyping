@@ -139,6 +139,9 @@ sankeyNodes.forEach(n => {
 })
 console.log("patternNodes",patternNodes)
 chart = Highcharts.chart('container', {
+    chart: {
+        height: 400
+    },
     title: {
         text: 'Estimated US Energy Consumption in 2017',
         style: parseMenuState("title")
