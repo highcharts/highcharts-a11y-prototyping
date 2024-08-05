@@ -1,4 +1,4 @@
-const barChart = Highcharts.chart('bar-container', {
+barChart = Highcharts.chart('bar-container', {
     chart: {
         type: 'bar'
     },
