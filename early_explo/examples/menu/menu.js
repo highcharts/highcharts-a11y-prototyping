@@ -35,7 +35,7 @@ const toggleOptions = (e) => {
     })
 }
 const toggleShowAvailable = (e) => {
-    e.srcElement.parentNode.parentNode.classList.toggle("highcharts-hiding-children")
+    e.srcElement.parentNode.parentNode.parentNode.classList.toggle("highcharts-hiding-children")
 }
 const runMenuFunction = option => {
     let parentGroup = option.option.parent ? option.option.parent : null

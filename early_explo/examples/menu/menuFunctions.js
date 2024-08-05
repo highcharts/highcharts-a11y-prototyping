@@ -1,4 +1,6 @@
 let chart;
+let barChart;
+let lineChart;
 let shadowChart;
 const menuFunctions = {
     Comprehension: {
