@@ -1,7 +1,7 @@
 const allPreferences = parsePreferences(rawPrefs)
 let allOptionsFlattened = {}
 
-let x = '<h1>Preferences</h1><div class="highcharts-empty-details">Hide unavailable options<input type="checkbox" class="highcharts-toggle-unavailable" checked></div>' + generatePreferencesHTML(allPreferences)
+let x = '<div class="highcharts-menu-padding"><h1>Preferences</h1><div class="highcharts-empty-details">Hide unavailable options<input type="checkbox" class="highcharts-toggle-unavailable" checked></div>' + generatePreferencesHTML(allPreferences) + "</div>"
 
 document.getElementById('menu').innerHTML = x
 
