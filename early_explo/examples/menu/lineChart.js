@@ -1,4 +1,4 @@
-const lineChart = Highcharts.chart('line-container', {
+lineChart = Highcharts.chart('line-container', {
     title: {
         text: 'Monthly Energy Consumption',
         align: 'left'
