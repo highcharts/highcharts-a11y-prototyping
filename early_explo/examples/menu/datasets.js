@@ -637,6 +637,8 @@ const datasets = {
         ]
     }
 }
+let strokeWidth = 1;
+let lineData = []
 const addJitter = (n) => {
     return n + +((Math.random() - 0.5)/50).toString().substring(0,5)
 }
@@ -674,3 +676,19 @@ const countDatasets = () => {
         console.log("target:",set.total*1000,"actual:",total)
     })
 }
+const buildLineData = () => {
+    Object.keys(datasets).forEach(ds => {
+        let set = datasets[ds]
+        let d = []
+        set.values.forEach(v => {
+            d.push(v.quads)
+        })
+        lineData.push({
+            name: ds,
+            data: d,
+            strokeWidth: strokeWidth,
+            color: colorMap[ds]
+        })
+    })
+}
+buildLineData()
