@@ -7,7 +7,7 @@ const menuFunctions = {
             change: (option)=> {
                 if (option.indexOf("show") > -1) {
                     document.getElementById("container").setAttribute("style","pointer-events: fill;")
-                    const srMajorRegion = document.getElementById("highcharts-screen-reader-region-before-0").children[0]
+                    const srMajorRegion = document.getElementById("highcharts-screen-reader-region-before-2").children[0]
                     srMajorRegion.setAttribute("style","font-size: 1.5em;")
                     srMajorRegion.querySelector("button").setAttribute("style","font-size: 1em;")
                     if (option.indexOf("all") > -1) {
@@ -24,7 +24,7 @@ const menuFunctions = {
                     }
                 } else {
                     document.getElementById("container").setAttribute("style","overflow: hidden; pointer-events: fill;")
-                    const srMajorRegion = document.getElementById("highcharts-screen-reader-region-before-0").children[0]
+                    const srMajorRegion = document.getElementById("highcharts-screen-reader-region-before-2").children[0]
                     console.log(option)
                     srMajorRegion.setAttribute("style","position: absolute; width: 1px; height: 1px; overflow: hidden; white-space: nowrap; clip: rect(1px, 1px, 1px, 1px); margin-top: -3px; opacity: 0.01;")
                     document.getElementById("container").querySelectorAll('.highcharts-visible-alt').forEach(e => e.remove())
