@@ -5,8 +5,8 @@
 .highcharts-figure,
 .highcharts-data-table table {
     min-width: 310px;
-    max-width: 800px;
-    margin: 1em auto;
+    max-width: 1600px;
+    margin: auto;
 }
 
 .highcharts-data-table table {
@@ -43,4 +43,27 @@
 
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
+}
+
+.highcharts-using-fills-low .highcharts-link {
+    fill-opacity: 0.35;
+}
+.highcharts-using-fills-high .highcharts-link {
+    fill-opacity: 0.6;
+}
+.highcharts-using-fills-low .highcharts-link.highcharts-point-inactive {
+    fill-opacity: 0.05;
+}
+.highcharts-using-fills-high .highcharts-link.highcharts-point-inactive {
+    fill-opacity: 0.1;
+}
+.highcharts-using-fills-low .highcharts-link.highcharts-point-hover {
+    fill-opacity: 0.7;
+}
+.highcharts-using-fills-high .highcharts-link.highcharts-point-hover {
+    fill-opacity: 1;
+}
+
+#bar-container .highcharts-point {
+    fill-opacity: 0.5;
 }

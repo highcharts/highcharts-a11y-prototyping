@@ -1,62 +1,247 @@
-var parsePreferences = (str) => {
-  const lines = str.trim().split('\n');
-  const stack = [];
-  let root = [];
-  console.log("lines",lines)
-
-  lines.forEach(line => {
-    console.log("root",root)
-    const indentLevel = (line.match(/-/g) || []).length;
-    console.log("indentLevel",indentLevel)
-    if (!indentLevel) {console.log("FAILURE")}
-
-    const cleanLine = line.replaceAll('- ',''); // Remove '- ' from the start
-    console.log("cleanline",cleanLine)
-
-    const [name, optionsStr] = cleanLine.split(' (');
-    console.log("options are...",optionsStr)
-
-    const options = optionsStr ? optionsStr.slice(0, -1).split(', ') : [];
-    console.log(options,"options")
-
-    const newItem = {
-      name: name.trim(),
-      options: options,
-      children: []
-    };
-
-    if (indentLevel === 1) {
-        root.push(newItem);
-    } else {
-        const parent = root[root.length - 1];
-        console.log("parent",parent)
-        // if (!parent.children) parent.children = [];
-        let target = parent;
-        if (indentLevel === 3) {
-            target = parent.children[parent.children.length - 1];
-
-            console.log("new target",target)
+const rawPrefs = `- Comprehension (default, moderate, robust)
+- - Alt text appearance (default, show high level, show all)
+- - Description verbosity (default, minimal, verbose)
+- - - Chart (default, minimal, verbose)
+- - - Region alt text (default, minimal, verbose)
+- - - Mark alt text (default, minimal, verbose)
+- - - Interactions (default, minimal, verbose)
+- - - Animations (default, minimal, verbose)
+- - - Sonification (default, minimal, verbose)
+- - Explanation verbosity (default, minimal, verbose)
+- - - Chart (default, minimal, verbose)
+- - - Data (default, minimal, verbose)
+- - - Interactions (default, minimal, verbose)
+- - - Animations (default, minimal, verbose)
+- - - Sonification (default, minimal, verbose)
+- - Cues and labels (default, pattern, show)
+- - - Annotations (default, pattern, show)
+- - - Mark Labels (default, pattern, show)
+- - - Series Labels (default, pattern, show)
+- - - Legend Title (default, pattern, show)
+- - - Legend Label (default, pattern, show)
+- - - Axis Title (default, pattern, show)
+- - - Axis Labels (default, pattern, show)
+- - - Gridlines (default, pattern, show)
+- - - Interactions (default, pattern, show)
+- Text (default, minimalist, moderate, maximalist)
+- - Font Size (default, small, medium, large)
+- - - Title (default, small, small+, medium, medium+, large)
+- - - Subtitle (default, small, small+, medium, medium+, large)
+- - - Mark Labels (default, small, small+, medium, medium+, large)
+- - - Series Labels (default, small, small+, medium, medium+, large)
+- - - Tooltip (default, small, small+, medium, medium+, large)
+- - - Legend Title (default, small, small+, medium, medium+, large)
+- - - Legend Labels (default, small, small+, medium, medium+, large)
+- - - Axis Titles (default, small, small+, medium, medium+, large)
+- - - Axis Labels (default, small, small+, medium, medium+, large)
+- - - Caption (default, small, small+, medium, medium+, large)
+- - - Annotations (default, small, small+, medium, medium+, large)
+- - - Misc. (default, small, small+, medium, medium+, large)
+- - Font Weight (default, 100, 400, 700)
+- - - Title (default, 100, 400, 700)
+- - - Subtitle (default, 100, 400, 700)
+- - - Mark Labels (default, 100, 400, 700)
+- - - Series Labels (default, 100, 400, 700)
+- - - Tooltip (default, 100, 400, 700)
+- - - Legend Title (default, 100, 400, 700)
+- - - Legend Labels (default, 100, 400, 700)
+- - - Axis Titles (default, 100, 400, 700)
+- - - Axis Labels (default, 100, 400, 700)
+- - - Caption (default, 100, 400, 700)
+- - - Annotations (default, 100, 400, 700)
+- - - Misc. (default, 100, 400, 700)
+- - Font Family (default, sans serif, serif, slab serif)
+- - - Title (default, sans serif, serif, slab serif)
+- - - Subtitle (default, sans serif, serif, slab serif)
+- - - Mark Labels (default, sans serif, serif, slab serif)
+- - - Series Labels (default, sans serif, serif, slab serif)
+- - - Legend Title (default, sans serif, serif, slab serif)
+- - - Legend Labels (default, sans serif, serif, slab serif)
+- - - Axis Titles (default, sans serif, serif, slab serif)
+- - - Axis Labels (default, sans serif, serif, slab serif)
+- - - Caption (default, sans serif, serif, slab serif)
+- - - Annotations (default, sans serif, serif, slab serif)
+- - - Misc. (default, sans serif, serif, slab serif)
+- - Text overflow (default, truncate, ellipses, allow overflow)
+- - - Title (default, truncate, ellipses, allow overflow)
+- - - Subtitle (default, truncate, ellipses, allow overflow)
+- - - Mark Labels (default, truncate, ellipses, allow overflow)
+- - - Series Labels (default, truncate, ellipses, allow overflow)
+- - - Legend Title (default, truncate, ellipses, allow overflow)
+- - - Legend Labels (default, truncate, ellipses, allow overflow)
+- - - Axis Titles (default, truncate, ellipses, allow overflow)
+- - - Axis Labels (default, truncate, ellipses, allow overflow)
+- - - Caption (default, truncate, ellipses, allow overflow)
+- - - Annotations (default, truncate, ellipses, allow overflow)
+- - - Misc. (default, truncate, ellipses, allow overflow)
+- - Horizontal Spacing (default, tight, moderate, wide)
+- - - Title (default, tight, moderate, wide)
+- - - Subtitle (default, tight, moderate, wide)
+- - - Mark Labels (default, tight, moderate, wide)
+- - - Series Labels (default, tight, moderate, wide)
+- - - Legend Title (default, tight, moderate, wide)
+- - - Legend Labels (default, tight, moderate, wide)
+- - - Axis Titles (default, tight, moderate, wide)
+- - - Axis Labels (default, tight, moderate, wide)
+- - - Caption (default, tight, moderate, wide)
+- - - Annotations (default, tight, moderate, wide)
+- - - Misc. (default, tight, moderate, wide)
+- - Vertical Spacing (default, tight, moderate, wide)
+- - - Title (default, tight, moderate, wide)
+- - - Subtitle (default, tight, moderate, wide)
+- - - Mark Labels (default, tight, moderate, wide)
+- - - Series Labels (default, tight, moderate, wide)
+- - - Legend Title (default, tight, moderate, wide)
+- - - Legend Labels (default, tight, moderate, wide)
+- - - Axis Titles (default, tight, moderate, wide)
+- - - Axis Labels (default, tight, moderate, wide)
+- - - Caption (default, tight, moderate, wide)
+- - - Annotations (default, tight, moderate, wide)
+- - - Misc. (default, tight, moderate, wide)
+- - Italics (default, allow, disabled)
+- - Alignment (default, left, centered, right)
+- - - Title (default, left, centered, right)
+- - - Subtitle (default, left, centered, right)
+- - - Mark Labels (default, left, centered, right)
+- - - Series Labels (default, left, centered, right)
+- - - Legend Title (default, left, centered, right)
+- - - Legend Labels (default, left, centered, right)
+- - - Axis Titles (default, left, centered, right)
+- - - Axis Labels (default, left, centered, right)
+- - - Caption (default, left, centered, right)
+- - - Annotations (default, left, centered, right)
+- - - Misc. (default, left, centered, right)
+- Color and contrast (default, minimalist, maximalist)
+- - Text color (default, black, grey, white, custom)
+- - Mark color (default, limited dark, limited white)
+- - - Categorical data types (default, limited dark, limited white, custom)
+- - - Ordinal data types (default, limited dark, limited white, custom)
+- - - Quantitative data types (default, limited dark, limited white, custom)
+- - - Non data marks (default, limited dark, limited white, custom)
+- - Distinguish without color (default, enabled)
+- - - Shapes (default, 1 varied type, different types, custom)
+- - - Fill patterns (default, low contrast, high contrast, custom)
+- - - Line patterns (default, enabled, custom)
+- - - Interaction states (default, patterns, marks, patterns + marks)
+- - Text contrast (default, low contrast, high contrast)
+- - - Title (default, low contrast, high contrast, custom)
+- - - Subtitle (default, low contrast, high contrast, custom)
+- - - Mark Labels (default, low contrast, high contrast, custom)
+- - - Series Labels (default, low contrast, high contrast, custom)
+- - - Legend Title (default, low contrast, high contrast, custom)
+- - - Legend Labels (default, low contrast, high contrast, custom)
+- - - Axis Titles (default, low contrast, high contrast, custom)
+- - - Axis Labels (default, low contrast, high contrast, custom)
+- - - Caption (default, low contrast, high contrast, custom)
+- - - Annotations (default, low contrast, high contrast, custom)
+- - - Misc. (default, low contrast, high contrast, custom)
+- - Mark contrast (default, low contrast, high contrast)
+- - - Categorical data types (default, low contrast, high contrast)
+- - - Ordinal data types (default, low contrast, high contrast)
+- - - Quantitative data types (default, low contrast, high contrast)
+- - - Non data marks (default, low contrast, high contrast)
+- - Mark opacity (default, low, moderate, full)
+- - Axis line contrast (default, low contrast, high contrast, custom)
+- - Gridline contrast (default, low contrast, high contrast, custom)
+- - Mark outline contrast (default, low contrast, high contrast, custom)
+- - Text outline contrast (default, low contrast, high contrast, custom)
+- - Interaction state contrast (default, low contrast, high contrast, custom)
+- - Misc. element contrast (default, low contrast, high contrast, custom)
+- Element size (default, smaller, moderate, larger)
+- - Bar spacing (default, 0%, 10%, 20%, 30%, 40%, 50%)
+- - Lines (default, light, moderate, thick)
+- - - Data lines (default, thin, light, moderate, thick, heavy)
+- - - Axis lines (default, thin, light, moderate, thick, heavy)
+- - - Gridlines (default, thin, light, moderate, thick, heavy)
+- - - Outlines (default, thin, light, moderate, thick, heavy)
+- - Mark min. size (default, 0, 3px, 10px)
+- - - Scaled mark min. (default, 0px to 44px)
+- - - Non scaled mark min. (default, 1px to 44px)
+- - Interaction target (default, minimal, moderate, large)
+- Audio (default, gentle, complex)
+- - Sonification volume (default, low, medium, high)
+- - - High pitch volume (default, quiet, low, medium, high, loud)
+- - - Middle pitch volume (default, quiet, low, medium, high, loud)
+- - - Low pitch volume (default, quiet, low, medium, high, loud)
+- - Sonification pitch range (default, small, moderate, full)
+- - - Pitch max. (default, 9k, 12k, 15k, 18k, 20k)
+- - - Pitch min. (default, 20, 100, 250, 500, 1000)
+- - Instruments (default, all sine, all piano, custom)
+- - Tempo ticker (default, quiet, moderate, loud)
+- Motion (default, disabled, slower, faster)
+- Interactivity (default, minimal feedback, high feedback)
+- - Pointer focus (default, disabled, on hover, on click)
+- - Interaction console (default, show as log, always show)
+- - Tooltips (default, show on focus, toggle only)
+- - Element selection (default, no confirmation, use confirmation)
+- - Filtering (default, no confirmation, use confirmation)
+- - Input mapping
+- - - Help (default, F1, custom keypress)
+- - - Preferences menu (default, Shift+F1, custom keypress)
+- - - Activate Hover (default, on focus, custom keypress)
+- - - Remove Hover (default, Backspace/on loss of focus, custom keypress)
+- - - Select (default, Spacebar/Enter, custom keypress)
+- - - Exit and skip chart (default, Escape, custom keypress)
+- - - Next element (default, AT right, down, custom keypress)
+- - - Previous element (default, AT left, up, custom keypress)
+- - - Next across element (default, period, custom keypress)
+- - - Previous across element (default, comma, custom keypress)
+- - - Parent element (default, AT up, page up, custom keypress)
+- - - First child element (default, AT down, page down, custom keypress)`
+const parsePreferences = (str) => {
+    const lines = str.trim().split('\n');
+    let root = [];
+  
+    lines.forEach(line => {
+        const indentLevel = (line.match(/-/g) || []).length;
+    
+        const cleanLine = line.replaceAll('- ',''); // Remove '- ' from the start
+    
+        const [name, optionsStr] = cleanLine.split(' (');
+    
+        const options = optionsStr ? optionsStr.slice(0, -1).split(', ') : [];
+  
+        let newItem = {
+            name: name.trim(),
+            domName: name.trim().toLowerCase().replace(/\s+/g, '-'),
+            options: options,
+            available: false,
+            parent: null,
+            children: []
+        };
+  
+        if (indentLevel === 1) {
+            if (menuState[newItem.name] && menuState[newItem.name].available) {
+                newItem.available = true
+            } else {
+                menuState[newItem.name] = {
+                    available: false,
+                    value: "",
+                    enabled: false
+                }
+            }
+            root.push(newItem);
+        } else {
+            const parent = root[root.length - 1];
+            // if (!parent.children) parent.children = [];
+            let target = parent;
+            let menuStateTarget = menuState[parent.name];
+            if (indentLevel === 3) {
+                target = parent.children[parent.children.length - 1];
+                menuStateTarget = menuState[parent.name][parent.children[parent.children.length - 1].name]
+            }
+            if (menuStateTarget.available && menuStateTarget[newItem.name] && menuStateTarget[newItem.name].available) {
+                newItem.available = true
+            } else {
+                menuStateTarget[newItem.name] = {
+                    available: false,
+                    value: "",
+                    enabled: false
+                }
+            }
+            newItem.parent = target
+            target.children.push(newItem)
         }
-        target.children.push(newItem)
-    }
-
-    // if (stack.length === 0) {
-    //   root.push(newItem);
-    //   stack.push(root[root.length - 1]);
-    // } else {
-    //   const parent = stack[stack.length - 1];
-    //   if (!parent.children) parent.children = [];
-    //   parent.children.push(newItem);
-    //   stack.push(parent.children[parent.children.length - 1]);
-    // }
-  });
-
-  // Clean up empty children arrays
-//   const cleanTree = (node) => {
-//     if (node.children.length === 0) delete node.children;
-//     else node.children.forEach(cleanTree);
-//   };
-//   root.forEach(cleanTree);
-
-  return root;
+    });
+    return root;
 }

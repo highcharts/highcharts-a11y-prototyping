@@ -15,10 +15,6 @@ form {
     display: inline;
 }
 
-fieldset {
-
-}
-
 legend {
 
 }
@@ -133,6 +129,10 @@ input[type=checkbox] {
     top: 0.4em;
 }
 
+.highcharts-menu-hidden-checkbox {
+    display: none;
+}
+
 details > summary {
     list-style-type: none;
 }
@@ -171,25 +171,28 @@ summary:hover {
 /* columns */
 .highcharts-responsive-two-columns > * {
     width:100%;
-    padding:1rem;
+    /* padding:1rem; */
+}
+
+.highcharts-menu-padding {
+    padding: 0.5rem 0;
+    border: 1px solid #767676;
+    border-radius: 10px;
+    max-height: 90vh;
+    overflow: scroll;
 }
 
 /* tablet breakpoint */
 @media (min-width:1079px) {
     .highcharts-responsive-column-menu {
-        width:32%;
+        width:30%;
     }
     .highcharts-responsive-column-chart {
-        width:62%;
-        height: 90vh;
+        width:70%;
     }
-}
-
-#menu {
-    border: 1px solid #767676;
-    border-radius: 10px;
-    max-height: 90vh;
-    overflow: scroll;
+    .highcharts-menu-halfwidth {
+        width: 50%;
+    }
 }
 
 input:hover {
