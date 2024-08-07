@@ -40,6 +40,16 @@ let menuState = {
                 value: "",
                 available: true,
                 enabled: false
+            },
+            "Axis Labels": {
+                value: "",
+                available: true,
+                enabled: false
+            },
+            "Legend Labels": {
+                value: "",
+                available: true,
+                enabled: false
             }
         },
         "Font Weight": {
@@ -62,6 +72,16 @@ let menuState = {
                 enabled: false
             },
             "Series Labels": {
+                value: "",
+                available: true,
+                enabled: false
+            },
+            "Axis Labels": {
+                value: "",
+                available: true,
+                enabled: false
+            },
+            "Legend Labels": {
                 value: "",
                 available: true,
                 enabled: false
