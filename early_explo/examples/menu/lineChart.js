@@ -1,4 +1,7 @@
 lineChart = Highcharts.chart('line-container', {
+    chart: {
+        height: 400
+    },
     title: {
         text: 'Monthly Energy Consumption',
         align: 'left'
@@ -8,11 +11,11 @@ lineChart = Highcharts.chart('line-container', {
     //     align: 'left'
     // },
 
-    // yAxis: {
-    //     title: {
-    //         text: ''
-    //     }
-    // },
+    yAxis: {
+        title: {
+            text: ''
+        }
+    },
 
     xAxis: {
         accessibility: {
