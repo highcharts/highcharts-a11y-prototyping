@@ -1,6 +1,7 @@
 barChart = Highcharts.chart('bar-container', {
     chart: {
-        type: 'bar'
+        type: 'bar',
+        height: 400
     },
     title: {
         text: 'Energy Sources',
@@ -49,55 +50,55 @@ barChart = Highcharts.chart('bar-container', {
             name: 'Geothermal',
             color: "#009c00",
             borderColor: "#009c00",
-            data: [0.21, 0, 0, 0, 0, 0, 0, 0, 0]
+            data: [0.21, null, null, null, null, null, null, null, null]
         },
         {
             name: 'Solar',
             color: "#009c00",
             borderColor: "#009c00",
-            data: [0, 0.77, 0, 0, 0, 0, 0, 0, 0]
+            data: [null, 0.77, null, null, null, null, null, null, null]
         }, 
         {
             name: 'Wind',
             color: "#009c00",
             borderColor: "#009c00",
-            data: [0, 0, 2.35, 0, 0, 0, 0, 0, 0]
+            data: [null, null, 2.35, null, null, null, null, null, null]
         },
         {
             name: 'Hydro',
             color: "#009c00",
             borderColor: "#009c00",
-            data: [0, 0, 0, 2.76, 0, 0, 0, 0, 0]
+            data: [null, null, null, 2.76, null, null, null, null, null]
         },
         {
             name: 'Biomass',
             color: "#009c00",
             borderColor: "#009c00",
-            data: [0, 0, 0, 0, 4.92, 0, 0, 0, 0]
+            data: [null, null, null, null, 4.92, null, null, null, null]
         },
         {
             name: 'Nuclear',
             color: "#1a8dff",
             borderColor: "#1a8dff",
-            data: [0, 0, 0, 0, 0, 8.42, 0, 0, 0]
+            data: [null, null, null, null, null, 8.42, null, null, null]
         },
         {
             name: 'Coal',
             color: "#989898",
             borderColor: "#989898",
-            data: [0, 0, 0, 0, 0, 0, 13.96, 0, 0]
+            data: [null, null, null, null, null, null, 13.96, null, null]
         },
         {
             name: 'Natural Gas',
             color: "#1a8dff",
             borderColor: "#1a8dff",
-            data: [0, 0, 0, 0, 0, 0, 0, 28.01, 0]
+            data: [null, null, null, null, null, null, null, 28.01, null]
         },
         {
             name: 'Petroleum',
             color: "#989898",
             borderColor: "#989898",
-            data: [0, 0, 0, 0, 0, 0, 0, 0, 36.2]
+            data: [null, null, null, null, null, null, null, null, 36.2]
         },
     ]
 });
