@@ -1,3 +1,20 @@
+const descriptions = {
+    "description-sankey": {
+        "minimal":  `Sankey charts are used to visualize data flow and volume between nodes.`,
+        "default": `Sankey charts are used to visualize data flow and volume between nodes. Visually wider lines indicate larger volumes.`,
+        "verbose": `Sankey charts are used to visualize data flow and volume between nodes. Visually wider lines indicate larger volumes. This chart is showing energy consumption and types. Interacting with this chart by selecting a node or flow (such as with a click) will update the stacked bar chart below.`
+    },
+    "description-bar": {
+        "minimal": `Chart showing stacked bars for comparing quantities.`,
+        "default": `Chart showing stacked bars for comparing quantities. Stacked charts are often used to visualize data that accumulates to a sum.`,
+        "verbose": `Chart showing stacked bars for comparing quantities. Stacked charts are often used to visualize data that accumulates to a sum. This chart is showing data from the energy sources, and will stack to demonstrate the proportion of an energy source that is currently selected by the previous Sankey Diagram.`
+    },
+    "description-line": {
+        "minimal": `Line chart for comparing change in data across categories.`,
+        "default": `Line chart for comparing change in data across categories. Line charts are often used to visualize change in data over time, showing important trends.`,
+        "verbose": `Line chart for comparing change in data across categories. Line charts are often used to visualize change in data over time, showing important trends. This chart is showing energy consumption over time, by type of consumption. Interacting with the legend can help focus or toggle on and off specific categories.`
+    },
+}
 const multipliers = {
     "flat": [
         {

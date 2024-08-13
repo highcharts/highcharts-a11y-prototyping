@@ -1,6 +1,6 @@
 lineChart = Highcharts.chart('line-container', {
     chart: {
-        height: 400
+        height: 350
     },
     title: {
         text: 'Monthly Energy Consumption',
