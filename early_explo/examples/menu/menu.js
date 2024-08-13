@@ -6,7 +6,7 @@ let x = '<div class="highcharts-menu-padding"><h1>Preferences</h1><div class="hi
 const urlParse = new URL(window.location.href)
 const urlMenu = urlParse.searchParams.get("menu");
 console.log("menu in url is:",urlMenu);
-if (urlMenu) {
+if (urlMenu !== "hide") {
     document.getElementById('menu').innerHTML = x
 
     const toggleMenu = (menu) => {
