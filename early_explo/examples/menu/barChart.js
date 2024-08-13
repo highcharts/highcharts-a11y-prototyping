@@ -1,7 +1,7 @@
 barChart = Highcharts.chart('bar-container', {
     chart: {
         type: 'bar',
-        height: 400
+        height: 350
     },
     title: {
         text: 'Energy Sources',
@@ -29,7 +29,7 @@ barChart = Highcharts.chart('bar-container', {
     plotOptions: {
         series: {
             stacking: 'normal',
-            pointWidth: 25,
+            pointWidth: 20,
             borderWidth: 2,
             dataLabels: {
                 enabled: true,

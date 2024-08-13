@@ -165,7 +165,18 @@ chart = Highcharts.chart('container', {
                 '{point.weight}.'
         }
     },
+    plotOptions: {
+        series: {
+            allowPointSelect: true,
+            states: {
+                select: {
+                    color: 'MidnightBlue'
+                }
+            }
+        }
+    },
     series: [{
+        // allowPointSelect: true,
         keys: ['from', 'to', 'weight'],
         nodes: sankeyNodes, // patternNodes
         data: sankeyData,
