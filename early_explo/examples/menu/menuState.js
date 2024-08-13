@@ -11,6 +11,16 @@ let menuState = {
             value: "",
             available: true,
             enabled: false
+        },
+        "Description verbosity": {
+            value: "",
+            available: true,
+            enabled: false,
+            "Chart": {
+                value: "",
+                available: true,
+                enabled: false
+            }
         }
     },
     Text: {
@@ -121,11 +131,11 @@ let menuState = {
             value: "",
             available: true,
             enabled: false,
-            Outlines : {
-                value: "",
-                available: true,
-                enabled: false
-            }
+            // Outlines : {
+            //     value: "",
+            //     available: true,
+            //     enabled: false
+            // }
         }
     },
     Audio: {
@@ -135,21 +145,31 @@ let menuState = {
     },
     Motion: {
         value: "",
-        available: true,
+        available: false,
         enabled: false
     },
     Interactivity: {
         value: "",
-        available: true,
+        available: false,
         enabled: false,
         "Pointer focus": {
             value: "",
-            available: true,
+            available: false,
             enabled: false
         }
     }
 }
 let overrideValues = {
+    "Comprehension": {
+        options: {
+            moderate:  {
+                "Description verbosity": "minimal"
+            },
+            robust:  {
+                "Description verbosity": "verbose"
+            }
+        }
+    },
     "Color and contrast": {
         options: {
             default: {
@@ -187,5 +207,11 @@ const menuStateValueMap = {
         medium: "1.25em",
         "medium+": "1.5em",
         large: "1.75em"
+    },
+    lineWidth: {
+        default: 2,
+        light: 1,
+        moderate: 3,
+        thick: 4
     }
 }

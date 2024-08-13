@@ -212,3 +212,9 @@ input:hover {
     display: block;
     position: absolute;
 }
+
+.highcharts-description {
+    padding: 10px;
+    padding-top: 0;
+    margin-top: 0;
+}

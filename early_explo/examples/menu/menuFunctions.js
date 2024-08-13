@@ -46,6 +46,34 @@ const menuFunctions = {
                     }
                 })
             }
+        },
+        "Description verbosity": {
+            change: option => {},
+            "Chart": {
+                change: option => {
+                    console.log("change chart desc!", option)
+                    //highcharts-description-default
+                    // description-line
+                    let chartlist = ["sankey","bar","line"]
+                    chartlist.forEach(c => {
+                        let chartId = `description-${c}`
+                        let chart = document.getElementById(chartId)
+                        let desc = descriptions[chartId][option]
+                        if (!desc) {
+                            console.log("NO description!")
+                            chart.classList.add("highcharts-menu-hidden")
+                        } else {
+                            chart.classList.remove("highcharts-menu-hidden")
+                            chart.innerText = desc
+                        }
+                    })
+                }
+            },
+            "Region alt text": {
+                change: option => {
+                    console.log("change region desc!", option)
+                }
+            }
         }
     },
     Text: {
@@ -370,10 +398,19 @@ const menuFunctions = {
     "Element size": {
         change: option => {},
         Lines: {
-            change: option => {},
-            Outlines : {
-                change: option => {},
-            }
+            change: option => {
+                console.log("changing lines!")
+                lineChart.update({
+                    plotOptions: {
+                        series: {
+                            lineWidth: menuStateValueMap.lineWidth[option]
+                        }
+                    }
+                })
+            },
+            // Outlines : {
+            //     change: option => {},
+            // }
         }
     },
     Audio: {
