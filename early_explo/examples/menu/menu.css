@@ -2,9 +2,9 @@ body {
     padding: 2vh 3vw;
 }
 
-h1 {
-    margin-left:0.5em;
-}
+/* h1 {
+    margin-left: 1vw;
+} */
 
 h1, h2, h3, h4, h5 h6 {
     margin-top: 0;
@@ -19,18 +19,22 @@ legend {
 
 }
 
-details, .highcharts-empty-details {
-    padding-left: 1em;
+details {
+    margin-top: 1vh;
+    padding-left: 1vw;
 }
 
 .highcharts-empty-details {
-    padding-left: 2em;
+    padding-left: 1.5vw;
 }
 
 summary, .highcharts-empty-summary {
-    padding-bottom: 0.5em;
-    padding-top: 0.375em;
-    padding-left: 0.5em;
+    padding: 0.5vw;
+    padding-left: 0;
+}
+
+summary {
+    border: 1px solid #ffffff00;
 }
 
 .highcharts-menu-column {
@@ -82,7 +86,7 @@ summary, .highcharts-empty-summary {
 .highcharts-menu-slider-wrapper {
     left: 0;
     /* top: -1.95em; */
-    padding-top: 0.2em;
+    padding-top: 0.4vh;
     position: relative;
     text-align: center;
     display: inline-block;
@@ -95,14 +99,14 @@ summary, .highcharts-empty-summary {
 
 .highcharts-menu-slider-option {
     text-align: center;
-    padding: 0 0.75em;
+    padding: 0 0.75vw;
     display: inherit;
 }
 
 .highcharts-menu-slider-option input {
     text-align: center;
     display: block;
-    margin: 0.2em auto 0;
+    margin: 0.4vh auto 0;
 }
 
 .highcharts-menu-slider-option label {
@@ -143,16 +147,12 @@ details > summary::-webkit-details-marker {
 
 details > summary::before {
     content: '\25BA';
-    padding-right: .1em;
+    padding-right: .1vw;
 }
 
 details[open] > summary::before {
     content: '\25BC';
     padding-right: 0;
-}
-
-summary {
-    border: 1px solid #ffffff00;
 }
 
 summary:hover {
@@ -173,13 +173,17 @@ summary:hover {
     width:100%;
     /* padding:1rem; */
 }
-
+    
 .highcharts-menu-padding {
-    padding: 0.5rem 0;
+    padding: 2vh 1vw;
     border: 1px solid #767676;
     border-radius: 10px;
     max-height: 90vh;
     overflow: scroll;
+}
+
+.highcharts-menu-padding p {
+    margin-bottom: 0;
 }
 
 /* tablet breakpoint */
@@ -217,4 +221,8 @@ input:hover {
     padding: 10px;
     padding-top: 0;
     margin-top: 0;
+}
+
+#toggle-unavailable {
+    margin-bottom: 2vh;
 }

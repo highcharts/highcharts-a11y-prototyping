@@ -1,7 +1,11 @@
 const allPreferences = parsePreferences(rawPrefs)
 let allOptionsFlattened = {}
 
-let x = '<div class="highcharts-menu-padding"><h1>Preferences</h1><div class="highcharts-empty-details">Hide unavailable options<input type="checkbox" class="highcharts-toggle-unavailable" checked></div>' + generatePreferencesHTML(allPreferences) + "</div>"
+let x = `<div class="highcharts-menu-padding">
+    <h1>Preferences</h1>
+    <p>This menu provides a way to customize charts and graphs. The menu is organized into categories, and adjusting the settings at the category level will adjust all of the settings within that category. Some settings within categories also have sub-settings which will also inherit higher level settings that they belong to. If wording for a category's setting is hard to understand, try changing that setting and then navigating into the menu to see which children settings it affected.</p>
+    <div><label for="toggle-unavailable">Hide unavailable options</label><input id="toggle-unavailable" name="toggle-unavailable" type="checkbox" class="highcharts-toggle-unavailable" checked>
+    </div>${ generatePreferencesHTML(allPreferences)}</div>`
 
 const urlParse = new URL(window.location.href)
 const urlMenu = urlParse.searchParams.get("menu");
