@@ -35,5 +35,19 @@ lineChart = Highcharts.chart('line-container', {
             }
         }
     },
+    sonification: {
+        duration: 8000,
+        defaultInstrumentOptions: {
+            mapping: {
+                pitch: {
+                    min: 'c3',
+                    max: 'd6'
+                }
+            }
+        }
+    },
     series: lineData,
 });
+document.getElementById('sonify').onclick = function () {
+    lineChart.toggleSonify();
+};

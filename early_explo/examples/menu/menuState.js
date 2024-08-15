@@ -140,8 +140,53 @@ let menuState = {
     },
     Audio: {
         value: "",
-        available: false,
-        enabled: false
+        available: true,
+        enabled: false,
+        "Sonification duration" : {
+            value: "",
+            available: true,
+            enabled: false,
+        },
+        "Sonification order" : {
+            value: "",
+            available: true,
+            enabled: false,
+        },
+        "Sonification volume": {
+            value: "",
+            available: true,
+            enabled: false
+        },
+        "Sonification pitch range" : {
+            value: "",
+            available: true,
+            enabled: false,
+            "Pitch min." : {
+                value: "",
+                available: true,
+                enabled: false,
+            },
+            "Pitch max." : {
+                value: "",
+                available: true,
+                enabled: false,
+            },
+        },
+        // "Tempo ticker": {
+        //     value: "",
+        //     available: true,
+        //     enabled: false,
+        //     "Tempo ticker timing": {
+        //         value: "",
+        //         available: true,
+        //         enabled: false
+        //     },
+        //     "Tempo ticker volume": {
+        //         value: "",
+        //         available: true,
+        //         enabled: false
+        //     },
+        // }
     },
     Motion: {
         value: "",
@@ -193,6 +238,24 @@ let overrideValues = {
                 }
             }
         }
+    },
+    "Audio": {
+        options: {
+            complex: {
+                "Sonification duration": "fast",
+                "Sonification volume": "high",
+                "Sonification pitch range": "full",
+                "Tempo ticker": "enabled"
+            }
+        },
+        "Tempo ticker": {
+            options: {
+                disabled: {
+                    "Tempo ticker volume": "default",
+                    "Tempo ticker timing": "default"
+                }
+            }
+        }
     }
 }
 const propNameMap = {
@@ -213,5 +276,17 @@ const menuStateValueMap = {
         light: 1,
         moderate: 3,
         thick: 4
+    },
+    duration: {
+        default: 8000,
+        slow: 12000,
+        moderate: 8000,
+        fast: 4000
+    },
+    volume: {
+        default: 0.7,
+        low: 0.2,
+        medium: 0.7,
+        high: 1.2
     }
 }

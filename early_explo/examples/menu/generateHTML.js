@@ -9,12 +9,10 @@ function generatePreferencesHTML(preferences, level = 2, parentName = '') {
     const children = pref.children && pref.children.length > 0
 
     const unavailable = pref.available ? "" : "highcharts-hide-unavailable"
-    const details = children ? `details  class="${unavailable}"` : `div class="highcharts-empty-details ${unavailable}"`
+    const details = children ? `details class="${unavailable}"` : `div class="highcharts-empty-details ${unavailable}"`
     const summary = children ? "summary" : "div class='highcharts-empty-summary'"
 
-    html += `<${details}">
-        <${summary} class="highcharts-menu-group highcharts-menu-group-${level - 1}">
-            <form>
+    html += `<div class="highcharts-details-wrapper ${unavailable}"><form>
                 <div class="highcharts-menu-column">
                     <div class="highcharts-column-left highcharts-column-level-${level - 1}">
                     <label class="highcharts-menu-checkbox-label highcharts-menu-checkbox-label-${level - 1}" for="${parentName+inputName}">
@@ -39,8 +37,9 @@ function generatePreferencesHTML(preferences, level = 2, parentName = '') {
                 ${option}
             </label><input type="radio" name="${parentName+inputName}" id="${optionName}" class="highcharts-menu-radio" value="${index}" required="" ${option === 'default' ? 'checked' : ''} ${unavailable ? 'disabled' : ''}></div>`;
     });
-                
-    html += `</div></div></form></${summary}>`;
+
+    html += `</div></div></form></div><${details}>
+        <${summary} class="highcharts-menu-group highcharts-menu-group-${level - 1}">${summary === "summary" ? "Show more..." : ""}</${summary}>`;
     const newParent = parentName+inputName+'-'
     if (children) {
       html += generatePreferencesHTML(pref.children, nextLevel, newParent);
