@@ -30,8 +30,8 @@ barChart = Highcharts.chart('bar-container', {
         series: {
             // stacking: 'normal',
             pointWidth: 20,
-            borderWidth: 1,
-            borderColor: "#019AF9",
+            borderWidth: 2,
+            borderColor: "#767676",
             dataLabels: {
                 enabled: true,
                 // formatter: function() {
@@ -42,7 +42,16 @@ barChart = Highcharts.chart('bar-container', {
     },
     series: [{
         name: "Quads",
-        data: [0.21,0.77, 2.35, 2.76, 4.92, 8.42, 13.96, 28.01, 36.2]
+        data: [
+            {y:0.21, color:'#009c00', borderColor:'#009c00'},
+            {y:0.77, color:'#009c00', borderColor:'#009c00'}, 
+            {y:2.35, color:'#009c00', borderColor:'#009c00'}, 
+            {y:2.76, color:'#009c00', borderColor:'#009c00'}, 
+            {y:4.92, color:'#009c00', borderColor:'#009c00'}, 
+            {y:8.42, color:'#1a8dff', borderColor:'#1a8dff'}, 
+            {y:13.96, color:'#989898', borderColor:'#989898'}, 
+            {y:28.01, color:'#1a8dff', borderColor:'#1a8dff'}, 
+            {y:36.2, color:'#989898', borderColor:'#989898'}]
     }]/* [ // [0.21,0.77, 2.35, 2.76, 4.92, 8.42, 13.96, 28.01, 36.2]
         {
             name: 'Not Included',
