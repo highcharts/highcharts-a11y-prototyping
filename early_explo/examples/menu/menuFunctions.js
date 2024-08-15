@@ -399,7 +399,7 @@ const menuFunctions = {
         change: option => {},
         Lines: {
             change: option => {
-                console.log("changing lines!")
+                // console.log("changing lines!")
                 lineChart.update({
                     plotOptions: {
                         series: {
@@ -415,6 +415,78 @@ const menuFunctions = {
     },
     Audio: {
         change: option => {},
+        "Sonification duration": {
+            change: option => {
+                lineChart.update({
+                    sonification: {
+                        duration: menuStateValueMap.duration[option]
+                    }
+                })
+            }
+        },
+        "Sonification order": {
+            change: option => {
+                lineChart.update({
+                    sonification: {
+                        order: option === 'default' ? 'sequential' : option
+                    }
+                })
+            }
+        },
+        "Sonification volume": {
+            change: option => {
+                lineChart.update({
+                    sonification: {
+                        masterVolume: menuStateValueMap.volume[option]
+                    }
+                })
+            }
+        },
+        "Sonification pitch range": {
+            change: () => {},
+            "Pitch min.": {
+                change: option => {
+                    lineChart.update({
+                        sonification: {
+                            defaultInstrumentOptions: {
+                                mapping: {
+                                    pitch: {
+                                        min: option === 'default' ? 'c3' : option,
+                                    }
+                                }
+                            }
+                        }
+                    })
+                }
+            },
+            "Pitch max.": {
+                change: option => {
+                    lineChart.update({
+                        sonification: {
+                            defaultInstrumentOptions: {
+                                mapping: {
+                                    pitch: {
+                                        max: option === 'default' ? 'd6' : option,
+                                    }
+                                }
+                            }
+                        }
+                    })
+                }
+            }
+        },
+        // "Tempo ticker timing": {
+        //     change: option => {
+        //         let tracks = 
+        //         lineChart.update({
+        //             sonification: {
+        //                 globalContextTracks: [
+        //                     option === 'default',
+        //                 ]
+        //             }
+        //         })
+        //     }
+        // },
     },
     Motion: {
         change: option => {},
@@ -429,11 +501,9 @@ const menuFunctions = {
 const parseMenuState = (highchartsPropName) => {
     let styleObject = {}
     let propName = propNameMap[highchartsPropName]
-    console.log(highchartsPropName)
     menuState.Text["Font Size"].Title.value ? propMap["Font Size"][menuState.Text["Font Size"].Title.value] : undefined
     if (menuState.Text["Font Size"][propName].value) {
         styleObject.fontSize = propValueMap.fontSize[menuState.Text["Font Size"][propName].value]
     }
-    console.log(styleObject)
     return styleObject
 }

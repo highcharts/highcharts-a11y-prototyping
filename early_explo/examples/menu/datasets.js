@@ -10,9 +10,9 @@ const descriptions = {
         "verbose": `Chart showing stacked bars for comparing quantities. Stacked charts are often used to visualize data that accumulates to a sum. This chart is showing data from the energy sources, and will stack to demonstrate the proportion of an energy source that is currently selected by the previous Sankey Diagram.`
     },
     "description-line": {
-        "minimal": `Line chart for comparing change in data across categories.`,
-        "default": `Line chart for comparing change in data across categories. Line charts are often used to visualize change in data over time, showing important trends.`,
-        "verbose": `Line chart for comparing change in data across categories. Line charts are often used to visualize change in data over time, showing important trends. This chart is showing energy consumption over time, by type of consumption. Interacting with the legend can help focus or toggle on and off specific categories.`
+        "minimal": `Line chart for comparing change in data across categories. Sonification will play all values selected in legend.`,
+        "default": `Line chart for comparing change in data across categories. Line charts are often used to visualize change in data over time, showing important trends. Sonification will play all values selected in legend.`,
+        "verbose": `Line chart for comparing change in data across categories. Line charts are often used to visualize change in data over time, showing important trends. This chart is showing energy consumption over time, by type of consumption. Interacting with the legend can help focus or toggle on and off specific categories. Sonification will play all values selected in legend.`
     },
 }
 const multipliers = {
