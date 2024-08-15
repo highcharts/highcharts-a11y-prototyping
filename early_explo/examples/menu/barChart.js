@@ -15,31 +15,35 @@ barChart = Highcharts.chart('bar-container', {
         title: {
             text: 'Total Quads'
         },
-        stackLabels: {
-            enabled: true
-        }
+        // stackLabels: {
+        //     enabled: true
+        // }
     },
     legend: {
         enabled: false
     },
-    tooltip: {
-        headerFormat: '<b>{point.x}</b><br/>',
-        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-    },
+    // tooltip: {
+    //     headerFormat: '<b>{point.x}</b><br/>',
+    //     pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    // },
     plotOptions: {
         series: {
-            stacking: 'normal',
+            // stacking: 'normal',
             pointWidth: 20,
-            borderWidth: 2,
+            borderWidth: 1,
+            borderColor: "#019AF9",
             dataLabels: {
                 enabled: true,
-                formatter: function() {
-                    return (this.y !== 0 && this.y !== this.total) ? this.y : "";
-                }
+                // formatter: function() {
+                //     return (this.y !== 0 && this.y !== this.total) ? this.y : "";
+                // }
             }
         }
     },
-    series: [
+    series: [{
+        name: "Quads",
+        data: [0.21,0.77, 2.35, 2.76, 4.92, 8.42, 13.96, 28.01, 36.2]
+    }]/* [ // [0.21,0.77, 2.35, 2.76, 4.92, 8.42, 13.96, 28.01, 36.2]
         {
             name: 'Not Included',
             color: "#ffffff",
@@ -100,5 +104,5 @@ barChart = Highcharts.chart('bar-container', {
             borderColor: "#989898",
             data: [null, null, null, null, null, null, null, null, 36.2]
         },
-    ]
+    ]*/
 });
