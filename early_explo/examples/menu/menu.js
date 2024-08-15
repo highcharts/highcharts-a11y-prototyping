@@ -76,10 +76,16 @@ if (urlMenu !== "hide") {
             let parentGroupOfParent = parentGroup && parentGroup.parent ? parentGroup.parent : null
 
             if (!targetName) {
+                // least legible block of code ever lol!
+                // basically, the menu's parent options don't always map perfectly to child names, so we try to check if there are override values set, otherwise try for index number matching
+                console.log("parentGroupOfParent",parentGroupOfParent)
+                console.log(" overrideValues?.[parentGroup?.name]?.[parentGroupOfParent?.name]?.options?.[sourceName]", overrideValues?.[parentGroup?.name]?.[parentGroupOfParent?.name]?.options?.[sourceName])
                 targetName = !parentGroupOfParent && overrideValues?.[parentGroup?.name]?.options?.[sourceName] 
                     ? overrideValues[parentGroup.name].options[sourceName][targetOption.name] 
                     : parentGroupOfParent && overrideValues?.[parentGroup?.name]?.[parentGroupOfParent?.name]?.options?.[sourceName] ? overrideValues[parentGroup.name][parentGroupOfParent.name].options[sourceName][targetOption.name] : undefined
             }
+            console.log("targetOption",targetOption)
+            console.log("targetName",targetName)
             targetName = targetName || targetOption.options[index]
             let id = `${parentGroupOfParent ? parentGroupOfParent.domName + '-' : ''}${parentGroup ? parentGroup.domName + '-' : ''}${targetOption.domName}-${targetName}`
             id = id.trim().toLowerCase().replace(/\s+/g, '-')

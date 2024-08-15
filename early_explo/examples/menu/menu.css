@@ -28,6 +28,13 @@ details {
     padding-left: 1.5vw;
 }
 
+#dashboard-heading {
+    position: absolute;
+    height: 1px;
+    left: -9999px;
+    top: -9999px;
+}
+
 summary, .highcharts-empty-summary {
     padding: 0.5vw;
     padding-left: 0;
@@ -195,6 +202,7 @@ summary:hover {
         width:70%;
     }
     .highcharts-menu-halfwidth {
+        margin-top: 0.5em;
         width: 50%;
     }
 }
@@ -220,7 +228,8 @@ input:hover {
 .highcharts-description {
     padding: 10px;
     padding-top: 0;
-    margin-top: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 #toggle-unavailable {
