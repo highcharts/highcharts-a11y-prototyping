@@ -5,7 +5,7 @@ let shadowChart;
 const menuFunctions = {
     Comprehension: {
         change: option => {},
-        "Alt text appearance": {
+        "Alt text visual appearance": {
             change: (option)=> {
                 [
                     {
@@ -51,7 +51,6 @@ const menuFunctions = {
             change: option => {},
             "Chart": {
                 change: option => {
-                    console.log("change chart desc!", option)
                     //highcharts-description-default
                     // description-line
                     let chartlist = ["sankey","bar","line"]
@@ -60,7 +59,6 @@ const menuFunctions = {
                         let chart = document.getElementById(chartId)
                         let desc = descriptions[chartId][option]
                         if (!desc) {
-                            console.log("NO description!")
                             chart.classList.add("highcharts-menu-hidden")
                         } else {
                             chart.classList.remove("highcharts-menu-hidden")
@@ -70,13 +68,11 @@ const menuFunctions = {
                 }
             },
             "Region alt text": {
-                change: option => {
-                    console.log("change region desc!", option)
-                }
+                change: option => {}
             }
         }
     },
-    Text: {
+    "Text visuals": {
         change: option => {},
         "Font Size": {
             change: option => {},
@@ -359,7 +355,6 @@ const menuFunctions = {
         },
         "Mark color": {
             change: option => {
-                console.log("changing mark colors!")
                 // default: [ "#2caffe", "#544fc5", "#00e272", "#fe6a35", "#6b8abc", "#d568fb", "#2ee0ca", "#fa4b42", "#feb56a", "#91e8e1" ]
                 let svgs = [...document.getElementsByTagName("svg")]
                 svgs.forEach(svg => {
@@ -373,7 +368,6 @@ const menuFunctions = {
             change: option => {},
             "Fill patterns": {
                 change: option => {
-                    console.log("fill patterns!",option)
                     if (option === 'default') {
                         document.querySelector('.highcharts-root').setAttribute('class','highcharts-root')
                         chart.update({
@@ -501,9 +495,9 @@ const menuFunctions = {
 const parseMenuState = (highchartsPropName) => {
     let styleObject = {}
     let propName = propNameMap[highchartsPropName]
-    menuState.Text["Font Size"].Title.value ? propMap["Font Size"][menuState.Text["Font Size"].Title.value] : undefined
-    if (menuState.Text["Font Size"][propName].value) {
-        styleObject.fontSize = propValueMap.fontSize[menuState.Text["Font Size"][propName].value]
+    menuState["Text visuals"]["Font Size"].Title.value ? propMap["Font Size"][menuState["Text visuals"]["Font Size"].Title.value] : undefined
+    if (menuState["Text visuals"]["Font Size"][propName].value) {
+        styleObject.fontSize = propValueMap.fontSize[menuState["Text visuals"]["Font Size"][propName].value]
     }
     return styleObject
 }

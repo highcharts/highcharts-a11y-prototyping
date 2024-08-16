@@ -137,7 +137,6 @@ sankeyNodes.forEach(n => {
     newNode.color = patternUrl
     patternNodes.push(newNode)
 })
-console.log("patternNodes",patternNodes)
 chart = Highcharts.chart('container', {
     chart: {
         height: 400
@@ -183,10 +182,10 @@ chart = Highcharts.chart('container', {
         point: {
             events: {
                 mouseOver: (d) => {
-                    // console.log("d",d)
-                    // console.log("d.target.linksFrom",d.target.linksFrom)
-                    // console.log("d.target.linksTo",d.target.linksTo)
-                    // console.log("d.target.graphic.element",d.target.graphic.element)
+                    console.log("d",d)
+                    console.log("d.target.linksFrom",d.target.linksFrom)
+                    console.log("d.target.linksTo",d.target.linksTo)
+                    console.log("d.target.graphic.element",d.target.graphic.element)
                 }
             } 
         },

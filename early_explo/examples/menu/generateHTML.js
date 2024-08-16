@@ -39,7 +39,7 @@ function generatePreferencesHTML(preferences, level = 2, parentName = '') {
     });
 
     html += `</div></div></form></div><${details}>
-        <${summary} class="highcharts-menu-group highcharts-menu-group-${level - 1}">${summary === "summary" ? "Show more..." : ""}</${summary}>`;
+        <${summary} class="highcharts-menu-group highcharts-menu-group-${level - 1}">${summary === "summary" ? `Show more ${pref.name.toLowerCase()} options...` : ""}</${summary}>`;
     const newParent = parentName+inputName+'-'
     if (children) {
       html += generatePreferencesHTML(pref.children, nextLevel, newParent);

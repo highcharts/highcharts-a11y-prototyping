@@ -7,7 +7,7 @@ let menuState = {
         value: "",
         available: true,
         enabled: false,
-        "Alt text appearance": {
+        "Alt text visual appearance": {
             value: "",
             available: true,
             enabled: false
@@ -23,7 +23,7 @@ let menuState = {
             }
         }
     },
-    Text: {
+    "Text visuals": {
         value: "",
         available: true,
         enabled: false,
