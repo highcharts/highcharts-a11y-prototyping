@@ -679,7 +679,6 @@ const buildAllDatasets = () => {
         let set = datasets[ds]
         if (multipliers[set.type]) {
             set.values = buildDataset(set.total, set.type)
-            console.log("target:",set.total,"actual:",set.values.realTotal)
         }
     })
 }
@@ -690,7 +689,6 @@ const countDatasets = () => {
         set.values.forEach(v => {
             total += v.quads*1000
         })
-        console.log("target:",set.total*1000,"actual:",total)
     })
 }
 const buildLineData = () => {

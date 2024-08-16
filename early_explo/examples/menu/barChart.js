@@ -52,7 +52,7 @@ barChart = Highcharts.chart('bar-container', {
             {y:13.96, color:'#989898', borderColor:'#989898'}, 
             {y:28.01, color:'#1a8dff', borderColor:'#1a8dff'}, 
             {y:36.2, color:'#989898', borderColor:'#989898'}]
-    }]/* [ // [0.21,0.77, 2.35, 2.76, 4.92, 8.42, 13.96, 28.01, 36.2]
+    }]/* [
         {
             name: 'Not Included',
             color: "#ffffff",
