@@ -196,6 +196,8 @@ const rawPrefs = `- Comprehension (default, moderate, robust)
 const parsePreferences = (str) => {
     const lines = str.trim().split('\n');
     let root = [];
+    let totalCount = 0
+    let combinatoric = 1
   
     lines.forEach(line => {
         const indentLevel = (line.match(/-/g) || []).length;
@@ -247,6 +249,13 @@ const parsePreferences = (str) => {
             newItem.parent = target
             target.children.push(newItem)
         }
+        if (newItem.available) {
+            totalCount += options.length
+            combinatoric = combinatoric * Math.max(options.length,1)
+        }
     });
+    console.log(root.length)
+    console.log(totalCount)
+    console.log(combinatoric)
     return root;
 }
